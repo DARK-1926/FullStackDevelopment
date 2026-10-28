@@ -8,11 +8,13 @@
 
 ## Release path
 
-1. Merge a reviewed PR into `main` after required checks pass.
-2. CI validates lint, types, tests, build, dependencies, and CodeQL.
-3. The deployment workflow publishes the frontend artifact to GitHub Pages.
-4. Verify the deployed URL, primary navigation, API/configuration health, and error boundaries.
-5. Record release notes and any known limitations.
+1. Open feature pull requests into `dev`.
+2. Let `dev` CI and CodeQL validate the integration branch.
+3. Open a reviewed promotion pull request from `dev` into `main`.
+4. After the promotion merges, CI and CodeQL validate `main`.
+5. The deployment workflow publishes the `main` artifact to GitHub Pages.
+6. Verify the deployed URL, primary navigation, API/configuration health, and error boundaries.
+7. Record release notes and any known limitations.
 
 ## Incident response
 
