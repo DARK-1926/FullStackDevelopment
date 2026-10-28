@@ -239,4 +239,4 @@ See [docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md) for the phased de
 - [Contributing](CONTRIBUTING.md) — branch, review, and local quality standards.
 - [Security policy](SECURITY.md) — private reporting and security boundaries.
 
-The repository includes pull-request and issue templates, CODEOWNERS, Dependabot, dependency review, CodeQL, CI quality gates, and Pages deployment automation. GitHub repository settings should additionally require the CI, dependency-review, and CodeQL checks before merging `main`, require a CODEOWNERS review, disable force pushes, and enable environment protection for production.
+The repository includes pull-request and issue templates, CODEOWNERS, Dependabot, production dependency auditing, CodeQL, CI quality gates, and Pages deployment automation. Once the repository dependency graph is enabled by an administrator, add GitHub's dependency-review action as a required pull-request check. GitHub repository settings should additionally require CI and CodeQL, require a CODEOWNERS review, disable force pushes, and enable environment protection for production.
