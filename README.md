@@ -195,3 +195,38 @@ The project will prioritize working features, data reliability, usability, and r
 ---
 streak repo of mine:https://github.com/DARK-1926/Streak
 **OpportunityOS — One platform to discover opportunities, prepare smarter, and track your growth.**
+
+## Starter setup
+
+The project now includes a Vite + React + TypeScript starter with a responsive dashboard, opportunity hub, shared application shell, typed sample data, and a CI/CD baseline.
+
+```bash
+npm install
+npm run dev
+```
+
+Quality checks:
+
+```bash
+npm run lint
+npm run typecheck
+npm test
+npm run build
+```
+
+## Repository structure
+
+```text
+src/
+  app/                 # Application composition and navigation
+  features/            # Product modules (dashboard, opportunities, growth, calendar)
+  shared/
+    components/        # Reusable UI primitives and shell
+    data/              # Temporary fixtures and seed data
+    types/             # Shared domain and UI types
+  styles/              # Global design tokens and responsive styles
+docs/                  # Product and engineering plans
+.github/workflows/     # Pull request quality gates and production deployment
+```
+
+See [docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md) for the phased delivery plan, architecture guardrails, and definition of done. Pull requests run lint, type checking, tests, and a production build. Pushes to `main` deploy the frontend to GitHub Pages.
