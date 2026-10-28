@@ -2,7 +2,7 @@
 
 ## Current starter
 
-The frontend is a Vite + React + TypeScript application. `src/app` composes the application, `src/features` owns product workflows, `src/shared` contains reusable UI and domain types, and `src/styles` owns global presentation. Temporary fixtures live in `src/shared/data` until API adapters are introduced.
+The frontend is a Vite + React + JavaScript application. `src/app` composes the application, `src/features` owns product workflows, `src/shared` contains reusable UI utilities and data modules, and `src/styles` owns global presentation. Temporary fixtures live in `src/shared/data` until API adapters are introduced.
 
 ```text
 src/
@@ -11,7 +11,6 @@ src/
   shared/
     components/        reusable UI and application shell
     data/               fixtures and source adapters
-    types/              domain and API contract types
   styles/              global tokens and responsive styles
 docs/                  roadmap, architecture, operations
 .github/               workflows, templates, ownership, dependency automation
@@ -21,7 +20,7 @@ docs/                  roadmap, architecture, operations
 
 ```text
 Browser UI
-  -> typed API client
+  -> API client
     -> server-side application API
       -> database/authentication
       -> source adapters

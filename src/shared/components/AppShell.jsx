@@ -1,9 +1,4 @@
-import type { ReactNode } from "react";
-import type { NavigationItem } from "../types/navigation";
-
-type AppShellProps = { navigation: NavigationItem[]; activePage: string; onNavigate: (id: string) => void; children: ReactNode };
-
-export function AppShell({ navigation, activePage, onNavigate, children }: AppShellProps) {
+export function AppShell({ navigation, activePage, onNavigate, children }) {
   return (
     <div className="app-shell">
       <aside className="sidebar">

@@ -3,9 +3,8 @@ import { useState } from "react";
 import { DashboardPage } from "../features/dashboard/DashboardPage";
 import { OpportunityPage } from "../features/opportunities/OpportunityPage";
 import { AppShell } from "../shared/components/AppShell";
-import type { NavigationItem } from "../shared/types/navigation";
 
-const navigation: NavigationItem[] = [
+const navigation = [
   { id: "overview", label: "Overview", icon: LayoutDashboard },
   { id: "opportunities", label: "Opportunities", icon: BriefcaseBusiness },
   { id: "growth", label: "Growth", icon: Activity },

@@ -16,7 +16,6 @@
 <!-- List exact commands, screenshots, manual checks, or explain why validation was not applicable. -->
 
 - [ ] `npm run lint`
-- [ ] `npm run typecheck`
 - [ ] `npm test`
 - [ ] `npm run build`
 

@@ -90,7 +90,7 @@ The platform will distinguish source-backed facts from AI-generated recommendati
 | Component | Technology |
 |---|---|
 | Frontend | React |
-| Language | JavaScript or TypeScript |
+| Language | JavaScript |
 | Styling | CSS or Tailwind CSS |
 | Charts | Recharts or Chart.js |
 | Backend | Minimal API layer or serverless functions |
@@ -198,7 +198,7 @@ streak repo of mine:https://github.com/DARK-1926/Streak
 
 ## Starter setup
 
-The project now includes a Vite + React + TypeScript starter with a responsive dashboard, opportunity hub, shared application shell, typed sample data, and a CI/CD baseline.
+The project now includes a Vite + React starter with a responsive dashboard, opportunity hub, shared application shell, sample data, and a CI/CD baseline.
 
 ```bash
 npm install
@@ -209,7 +209,6 @@ Quality checks:
 
 ```bash
 npm run lint
-npm run typecheck
 npm test
 npm run build
 ```
@@ -223,13 +222,12 @@ src/
   shared/
     components/        # Reusable UI primitives and shell
     data/              # Temporary fixtures and seed data
-    types/             # Shared domain and UI types
   styles/              # Global design tokens and responsive styles
 docs/                  # Product and engineering plans
 .github/workflows/     # Pull request quality gates and production deployment
 ```
 
-See [docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md) for the phased delivery plan, architecture guardrails, and definition of done. Pull requests run lint, type checking, tests, and a production build. Pushes to `main` deploy the frontend to GitHub Pages.
+See [docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md) for the phased delivery plan, architecture guardrails, and definition of done. Pull requests run lint, tests, and a production build. Pushes to `dev` and `main` run the deploy workflow for beta and production branch validation.
 
 ## Engineering handbook
 
