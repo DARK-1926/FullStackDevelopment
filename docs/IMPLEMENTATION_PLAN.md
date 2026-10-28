@@ -8,10 +8,10 @@ Build a focused workspace for discovering opportunities, preparing applications,
 
 ### Phase 1 — Foundation (current)
 
-- Establish the Vite + React + TypeScript application shell.
+- Establish the Vite + React + JavaScript application shell.
 - Define feature boundaries for dashboard, opportunities, growth, calendar, and settings.
-- Add shared types, sample data, responsive styling, and navigation.
-- Enforce type safety, linting, and production builds in CI.
+- Add shared data modules, responsive styling, and navigation.
+- Enforce linting, tests, and production builds in CI.
 
 ### Phase 2 — Core opportunity workflow
 
@@ -36,7 +36,7 @@ Build a focused workspace for discovering opportunities, preparing applications,
 
 - Add unit tests for data processing and integration tests for critical flows.
 - Add accessibility checks, error monitoring, rate limits, and security review.
-- Deploy the frontend from `main`; deploy protected API and scheduled jobs separately.
+- Deploy the frontend from `dev` (beta verification) and `main` (production validation); deploy protected API and scheduled jobs separately.
 - Use preview deployments for pull requests and require CI before merge.
 
 ## Engineering guardrails
