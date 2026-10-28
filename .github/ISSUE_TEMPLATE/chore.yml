@@ -1,0 +1,19 @@
+name: Engineering chore
+description: Track maintenance, refactoring, documentation, or delivery work.
+title: "[Chore]: "
+labels: ["chore", "triage"]
+body:
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: What needs to change and why?
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Definition of done
+      description: List tests, documentation, rollout, and verification requirements.
+    validations:
+      required: true
