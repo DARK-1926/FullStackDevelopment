@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "typecheck": "tsc -b --pretty false",
-    "test": "vitest run"
+    "test": "vitest run",
+    "audit:production": "npm audit --omit=dev --audit-level=high"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",

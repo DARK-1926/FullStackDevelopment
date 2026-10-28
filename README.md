@@ -230,3 +230,13 @@ docs/                  # Product and engineering plans
 ```
 
 See [docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md) for the phased delivery plan, architecture guardrails, and definition of done. Pull requests run lint, type checking, tests, and a production build. Pushes to `main` deploy the frontend to GitHub Pages.
+
+## Engineering handbook
+
+- [Delivery roadmap](docs/ROADMAP.md) — issue-to-milestone plan and enterprise controls.
+- [Architecture](docs/ARCHITECTURE.md) — repository map and target service boundaries.
+- [Operations](docs/OPERATIONS.md) — environments, releases, incidents, and production readiness.
+- [Contributing](CONTRIBUTING.md) — branch, review, and local quality standards.
+- [Security policy](SECURITY.md) — private reporting and security boundaries.
+
+The repository includes pull-request and issue templates, CODEOWNERS, Dependabot, dependency review, CodeQL, CI quality gates, and Pages deployment automation. GitHub repository settings should additionally require the CI, dependency-review, and CodeQL checks before merging `main`, require a CODEOWNERS review, disable force pushes, and enable environment protection for production.

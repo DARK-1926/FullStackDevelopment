@@ -31,5 +31,7 @@ jobs:
         run: npm run typecheck
       - name: Test
         run: npm test
+      - name: Audit production dependencies
+        run: npm run audit:production
       - name: Build
         run: npm run build
