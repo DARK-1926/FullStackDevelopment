@@ -195,3 +195,48 @@ The project will prioritize working features, data reliability, usability, and r
 ---
 streak repo of mine:https://github.com/DARK-1926/Streak
 **OpportunityOS — One platform to discover opportunities, prepare smarter, and track your growth.**
+
+## Starter setup
+
+The project now includes a Vite + React + TypeScript starter with a responsive dashboard, opportunity hub, shared application shell, typed sample data, and a CI/CD baseline.
+
+```bash
+npm install
+npm run dev
+```
+
+Quality checks:
+
+```bash
+npm run lint
+npm run typecheck
+npm test
+npm run build
+```
+
+## Repository structure
+
+```text
+src/
+  app/                 # Application composition and navigation
+  features/            # Product modules (dashboard, opportunities, growth, calendar)
+  shared/
+    components/        # Reusable UI primitives and shell
+    data/              # Temporary fixtures and seed data
+    types/             # Shared domain and UI types
+  styles/              # Global design tokens and responsive styles
+docs/                  # Product and engineering plans
+.github/workflows/     # Pull request quality gates and production deployment
+```
+
+See [docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md) for the phased delivery plan, architecture guardrails, and definition of done. Pull requests run lint, type checking, tests, and a production build. Pushes to `main` deploy the frontend to GitHub Pages.
+
+## Engineering handbook
+
+- [Delivery roadmap](docs/ROADMAP.md) — issue-to-milestone plan and enterprise controls.
+- [Architecture](docs/ARCHITECTURE.md) — repository map and target service boundaries.
+- [Operations](docs/OPERATIONS.md) — environments, releases, incidents, and production readiness.
+- [Contributing](CONTRIBUTING.md) — branch, review, and local quality standards.
+- [Security policy](SECURITY.md) — private reporting and security boundaries.
+
+The repository includes pull-request and issue templates, CODEOWNERS, Dependabot, production dependency auditing, CodeQL, CI quality gates, and Pages deployment automation. Once the repository dependency graph is enabled by an administrator, add GitHub's dependency-review action as a required pull-request check. GitHub repository settings should additionally require CI and CodeQL, require a CODEOWNERS review, disable force pushes, and enable environment protection for production.

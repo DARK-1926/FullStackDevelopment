@@ -1,0 +1,5 @@
+# Default ownership for review routing. Add domain-specific owners as the team grows.
+* @DARK-1926
+.github/ @DARK-1926
+src/ @DARK-1926
+docs/ @DARK-1926
