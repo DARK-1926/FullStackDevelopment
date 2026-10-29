@@ -1,0 +1,66 @@
+{
+  "users": [
+    {
+      "_id": "user-default-1",
+      "name": "Alex Shah",
+      "email": "alex@university.edu",
+      "password": "$2b$10$iVJobOQTW9S8KJldx9qHWuRhUQwp08kQfBIQ5D13qYUDqFWQ3kJF2",
+      "university": "National Institute of Technology",
+      "degree": "B.Tech in Computer Science & Engineering",
+      "gradYear": "2027",
+      "targetRoles": [
+        "Frontend Engineer",
+        "Full Stack Developer",
+        "Software Engineering Intern"
+      ],
+      "skills": [
+        "React",
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "Data Structures",
+        "Algorithms",
+        "Git",
+        "GitHub"
+      ],
+      "resumeSummary": "Computer Science undergraduate with hands-on experience building fullstack and reactive web apps. Active competitive programmer with 300+ problems solved across LeetCode and Codeforces.",
+      "platformHandles": {
+        "leetcode": "alex_shah",
+        "codeforces": "alex_coder",
+        "github": "alexshah-dev"
+      }
+    },
+    {
+      "_id": "user-1793206796228",
+      "university": "Test Tech University",
+      "degree": "B.Tech in Computer Science & Engineering",
+      "gradYear": "2027",
+      "targetRoles": [
+        "Software Engineer",
+        "Full Stack Developer"
+      ],
+      "skills": [
+        "React",
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "Node.js",
+        "MongoDB"
+      ],
+      "resumeSummary": "Aspiring software engineer eager to build modern scalable applications.",
+      "platformHandles": {
+        "leetcode": "",
+        "codeforces": "",
+        "github": ""
+      },
+      "name": "Test Student",
+      "email": "test_1793206796172@university.edu",
+      "password": "$2b$10$kbftW0k4uP/P3o3tYCNi3uOtPsgEtEtaz3IEGIwy1z3vh0JrLm1a."
+    }
+  ],
+  "applications": [],
+  "growthLogs": []
+}

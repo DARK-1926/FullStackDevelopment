@@ -205,6 +205,8 @@ npm install
 npm run dev
 ```
 
+For production, configure `CLIENT_ORIGINS` on the backend as a comma-separated list of exact frontend origins (for example, `https://opportunity.example.com`). Local Vite origins are enabled only outside production. Authentication endpoints are limited to 10 requests per IP per 15 minutes; other account endpoints are limited to 100 requests per IP per 15 minutes.
+
 Quality checks:
 
 ```bash
