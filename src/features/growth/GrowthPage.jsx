@@ -17,6 +17,7 @@ import {
 import { useMemo, useState } from "react";
 import { useAppContext } from "../../shared/context/AppContext.jsx";
 import { streakMilestones } from "../../shared/data/sampleData.js";
+import ContributionSkyline from "@/components/ui/contribution-skyline";
 
 export function GrowthPage() {
   const {
@@ -430,6 +431,20 @@ export function GrowthPage() {
                 Active repositories include opportunity-os, algorithms-ts, and streak.
               </p>
             </div>
+          </section>
+
+          {/* 3D Isometric Skyline Visualizer */}
+          <section style={{ marginBottom: 24 }}>
+            <ContributionSkyline
+              title={
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <Flame size={18} color="#ea580c" />
+                  <strong style={{ fontSize: 16 }}>3D Contribution Skyline & Consistency Engine</strong>
+                </div>
+              }
+              palette="github"
+              defaultView="3d"
+            />
           </section>
 
           {/* Consistency Heatmap & Practice History */}
