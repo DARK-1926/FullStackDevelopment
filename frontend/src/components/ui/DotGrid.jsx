@@ -172,8 +172,8 @@ const DotGrid = ({
     dpr
   };
   const settingsRef = useRef(settings);
-  // The animation loop reads the latest props without restarting its WebGL setup.
-  // eslint-disable-next-line react-hooks/refs
+
+
   settingsRef.current = settings;
 
   useEffect(() => {

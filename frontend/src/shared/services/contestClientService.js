@@ -1,18 +1,18 @@
-/**
- * Client service for real-time live contest data across:
- * - Codeforces (Official REST API)
- * - LeetCode (Public GraphQL Gateway)
- * - CodeChef (Official internal JSON feed)
- * - GeeksforGeeks (Weekly & Job-a-thon events)
- */
+
+
+
+
+
+
+
 
 const API_BASE = import.meta.env.VITE_API_URL || "";
 
-/**
- * Fetches real live contests from backend
- * @param {Object} options
- * @param {boolean} [options.force=false]
- */
+
+
+
+
+
 export async function fetchLiveContests(options = {}) {
   const { force = false } = options;
   const url = `${API_BASE}/api/contests?force=${force}`;

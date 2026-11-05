@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const DATA_FILE = path.join(__dirname, "..", "..", "local_db.json");
 
-// Default initial user for instant testing: alex@university.edu / password123
+
 const DEFAULT_PASSWORD_HASH = bcrypt.hashSync("password123", 10);
 
 const defaultApplications = [
@@ -95,8 +95,8 @@ function readDb() {
       inMemoryDb = JSON.parse(JSON.stringify(defaultData));
       try {
         fs.writeFileSync(DATA_FILE, JSON.stringify(defaultData, null, 2));
-      } catch (_e) {
-        // Read-only filesystem in serverless environments
+      } catch (error) {
+        console.warn("Could not initialize the fallback data file:", error);
       }
     }
     if (!inMemoryDb.opportunities || inMemoryDb.opportunities.length === 0) {
@@ -106,7 +106,8 @@ function readDb() {
       inMemoryDb.applications = defaultApplications;
     }
     return inMemoryDb;
-  } catch (_e) {
+  } catch (error) {
+    console.warn("Could not read fallback data; using defaults:", error);
     inMemoryDb = JSON.parse(JSON.stringify(defaultData));
     return inMemoryDb;
   }
@@ -116,8 +117,8 @@ function writeDb(data) {
   inMemoryDb = data;
   try {
     fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
-  } catch (_err) {
-    // Read-only filesystem on serverless; inMemoryDb persists across warm requests
+  } catch (error) {
+    console.error("Could not persist fallback data:", error);
   }
 }
 

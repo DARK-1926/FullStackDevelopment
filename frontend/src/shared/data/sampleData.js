@@ -145,7 +145,7 @@ export const initialOpportunities = [
   },
 ];
 
-// Compatibility export
+
 export const upcomingOpportunities = initialOpportunities;
 
 export const initialProfile = {
@@ -267,7 +267,7 @@ export const initialGrowthStats = {
   longestStreak: 28,
   lastActiveDate: defaultYesterday,
   streakAtRisk: true,
-  dailyGoal: 2, // Target problems or commits per day
+  dailyGoal: 2,
   todayCompletedCount: 0,
   streakFreezesAvailable: 2,
   totalProblemsSolved: 552,

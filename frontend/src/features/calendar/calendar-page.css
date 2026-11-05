@@ -1,4 +1,4 @@
-/* Interactive Monthly Calendar & Event Agenda Styles - Dark Glass Theme */
+
 
 .calendar-page-container {
   display: flex;
@@ -9,7 +9,7 @@
   width: 100%;
 }
 
-/* Page Header & Controls */
+
 .calendar-header-toolbar {
   display: flex;
   justify-content: space-between;
@@ -25,7 +25,7 @@
   flex-wrap: wrap;
 }
 
-/* 2-COLUMN MAIN LAYOUT: CALENDAR (LEFT, HALF VERTICALLY) + AGENDA (RIGHT) */
+
 .calendar-main-layout {
   display: grid;
   grid-template-columns: minmax(360px, 1fr) minmax(360px, 1.15fr);
@@ -33,7 +33,7 @@
   align-items: start;
 }
 
-/* Calendar Card / Board (Left Column) */
+
 .calendar-glass-card {
   position: relative;
   background: rgba(13, 17, 23, 0.72);
@@ -46,7 +46,7 @@
   transition: border-color 0.2s ease;
 }
 
-/* Monthly Navigation Bar */
+
 .calendar-nav-bar {
   display: flex;
   justify-content: space-between;
@@ -113,7 +113,7 @@
   border-color: rgba(255, 255, 255, 0.25);
 }
 
-/* 7-Column Grid */
+
 .calendar-grid-header {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -137,7 +137,7 @@
   gap: 6px;
 }
 
-/* Individual Date Cell Button - Compact Height */
+
 .calendar-date-cell {
   position: relative;
   background: rgba(255, 255, 255, 0.02);
@@ -192,7 +192,7 @@
   color: #38bdf8;
 }
 
-/* In-Cell Pastel Event Chips (Reference Image 3) */
+
 .cell-event-chips {
   display: flex;
   flex-direction: column;
@@ -251,7 +251,7 @@
   margin-left: 3px;
 }
 
-/* Legend Row */
+
 .calendar-legend-bar {
   display: flex;
   align-items: center;
@@ -285,7 +285,7 @@
   display: inline-block;
 }
 
-/* RIGHT COLUMN: AGENDA SECTION */
+
 .agenda-section {
   display: flex;
   flex-direction: column;
@@ -343,7 +343,7 @@
   padding-bottom: 24px;
 }
 
-/* Custom Sleek Scrollbar for Agenda List */
+
 .agenda-events-list::-webkit-scrollbar {
   width: 6px;
 }
@@ -362,7 +362,7 @@
   background: rgba(56, 189, 248, 0.4);
 }
 
-/* Accordion Event Row Card */
+
 .event-accordion-card {
   background: rgba(13, 17, 23, 0.72);
   backdrop-filter: blur(14px);
@@ -392,7 +392,7 @@
   opacity: 0.95;
 }
 
-/* Collapsed Header / Trigger */
+
 .event-accordion-trigger {
   width: 100%;
   padding: 14px 16px;
@@ -479,7 +479,7 @@
   color: #38bdf8;
 }
 
-/* Expanded Detail Body (Reference 1 style) */
+
 .event-accordion-body {
   padding: 14px 16px 16px 16px;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
@@ -547,7 +547,7 @@
   padding-top: 4px;
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 960px) {
   .calendar-main-layout {
     grid-template-columns: minmax(0, 1fr);

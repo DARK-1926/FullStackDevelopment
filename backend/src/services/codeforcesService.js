@@ -1,9 +1,9 @@
-/**
- * Real-time Codeforces statistics and recent activity synchronization.
- * Integrates with official Codeforces public REST APIs.
- */
 
-const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes cache
+
+
+
+
+const CACHE_TTL_MS = 5 * 60 * 1000;
 const cache = new Map();
 
 const BROWSER_HEADERS = {
@@ -11,20 +11,20 @@ const BROWSER_HEADERS = {
   Accept: "application/json",
 };
 
-/**
- * Validates a Codeforces handle format.
- * Codeforces handles are 3-24 characters containing letters, digits, dots, underscores, and hyphens.
- */
+
+
+
+
 export function isValidHandle(handle) {
   if (!handle || typeof handle !== "string") return false;
   const trimmed = handle.trim();
   return /^[a-zA-Z0-9_.-]{3,24}$/.test(trimmed);
 }
 
-/**
- * Fetches and parses live Codeforces profile data and accepted submissions.
- * Accepts options: { forceRefresh?: boolean }
- */
+
+
+
+
 export async function getCodeforcesProfile(handle, options = {}) {
   const { forceRefresh = false } = options;
 
@@ -47,7 +47,7 @@ export async function getCodeforcesProfile(handle, options = {}) {
   }
 
   try {
-    // 1. Fetch user.info
+
     const userRes = await fetch(
       `https://codeforces.com/api/user.info?handles=${encodeURIComponent(normalizedHandle)}`,
       {
@@ -73,7 +73,7 @@ export async function getCodeforcesProfile(handle, options = {}) {
 
     const userInfo = userData.result[0];
 
-    // 2. Fetch user.status (recent submissions)
+
     const recentSubmissions = [];
     let totalSolved = 0;
 
@@ -96,7 +96,7 @@ export async function getCodeforcesProfile(handle, options = {}) {
               const problemId = `${s.problem.contestId}-${s.problem.index}`;
               solvedSet.add(problemId);
 
-              // Capture the latest 5 unique accepted solutions as activity logs
+
               if (recentSubmissions.length < 5 && !recentSubmissions.some((e) => e.notes.includes(s.problem.name))) {
                 const dateStr = s.creationTimeSeconds
                   ? new Date(s.creationTimeSeconds * 1000).toISOString().split("T")[0]

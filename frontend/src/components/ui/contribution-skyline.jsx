@@ -1,12 +1,13 @@
 import * as React from "react";
+import "./contribution-skyline.css";
 
-/**
- * Contribution Skyline — a year of activity as a GitHub-style heat map that
- * folds up into an isometric skyline, and back down again.
- *
- * Canvas + DOM, pure React. Pass `data` as `{ date, count }[]`;
- * without it a seeded, believable year is generated so the demo is never empty.
- */
+
+
+
+
+
+
+
 
 const DAY_MS = 86400000;
 
@@ -22,12 +23,12 @@ const smoothstep = (a, b, x) => {
   return t * t * (3 - 2 * t);
 };
 
-/** UTC midnight → "YYYY-MM-DD". */
+
 const toKey = (ms) => new Date(ms).toISOString().slice(0, 10);
 
-/**
- * Any date-ish value → UTC midnight of its calendar day.
- */
+
+
+
 const dayMs = (v) => {
   if (typeof v === "number") return Math.floor(v / DAY_MS) * DAY_MS;
   if (typeof v === "string") {
@@ -46,7 +47,7 @@ const PLATFORM_LABELS = {
   github: "GitHub public events",
 };
 
-/** mulberry32 — small, fast, deterministic. */
+
 const rng = (seed) => {
   let a = seed >>> 0;
   return () => {
@@ -58,10 +59,10 @@ const rng = (seed) => {
   };
 };
 
-/**
- * A believable year for demos: quiet weekends, a few busy seasons, a mood that
- * drifts week to week, and the odd enormous day.
- */
+
+
+
+
 const generateContributions = (endMs, seed = 7, days = 371) => {
   const r = rng(seed);
   const bursts = Array.from({ length: 4 }, () => ({
@@ -95,13 +96,13 @@ const generateContributions = (endMs, seed = 7, days = 371) => {
   return out;
 };
 
-/** 0 for an empty day, else 1–4 by quarters of `busy`. */
+
 const levelOf = (count, busy) =>
   count <= 0 ? 0 : busy <= 0 ? 4 : 1 + Math.min(3, Math.floor((count / busy) * 4));
 
-/**
- * The grid: columns are weeks, rows are weekdays (row 0 = `weekStart`).
- */
+
+
+
 const buildGrid = (data, endMs, weekStart = 0, rangeDays = 365) => {
   const counts = new Map();
   const platformsByDate = new Map();
@@ -149,7 +150,7 @@ const buildGrid = (data, endMs, weekStart = 0, rangeDays = 365) => {
   };
 };
 
-/** Total, busiest day, longest run, and current run. */
+
 const computeStats = (cells) => {
   let total = 0;
   let best = 0;
@@ -189,7 +190,7 @@ const computeStats = (cells) => {
   };
 };
 
-/** A label on each week whose first day starts a new month. */
+
 const monthLabels = (cells, weeks, locale = "en-US") => {
   const fmt = new Intl.DateTimeFormat(locale, { month: "short", timeZone: "UTC" });
   const out = [];
@@ -205,7 +206,7 @@ const monthLabels = (cells, weeks, locale = "en-US") => {
   return out;
 };
 
-/** Box height in grid units. */
+
 const barHeight = (count, max, scale = 1) =>
   count > 0 && max > 0 ? 0.4 + Math.pow(count / max, 0.85) * 7.2 * scale : 0.2;
 
@@ -1016,7 +1017,7 @@ export default function ContributionSkyline({
         try {
           canvas.setPointerCapture(ev.pointerId);
         } catch {
-          // pointer capture fallback
+          drag = null;
         }
       }
     };
@@ -1282,18 +1283,8 @@ export default function ContributionSkyline({
           <div
             role="group"
             aria-label="Chart view"
-            className="relative inline-flex rounded-md border p-0.5"
-            style={{ borderColor: "var(--color-border, #e5e5e5)" }}
+            className="contribution-view-toggle"
           >
-            <span
-              aria-hidden="true"
-              className="absolute top-0.5 bottom-0.5 left-0.5 w-8 rounded transition-transform duration-500 motion-reduce:transition-none"
-              style={{
-                background: "var(--color-foreground, #171717)",
-                transform: is3d ? "translateX(100%)" : "translateX(0)",
-                transitionTimingFunction: ease,
-              }}
-            />
             {["2d", "3d"].map((v) => (
               <button
                 key={v}
@@ -1302,13 +1293,10 @@ export default function ContributionSkyline({
                 aria-label={v === "2d" ? "Flat heat map" : "3D skyline"}
                 title={v === "2d" ? "Flat heat map" : "3D skyline"}
                 onClick={() => setView(v)}
-                className="relative z-10 grid h-7 w-8 cursor-pointer place-items-center rounded border-0 bg-transparent p-0 transition-colors duration-500 focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none"
-                style={{
-                  color: view === v ? "var(--color-background, #ffffff)" : MUTED,
-                  outlineColor: "var(--color-foreground, #171717)",
-                }}
+                className="contribution-view-toggle-button"
               >
                 {v === "2d" ? <GridIcon /> : <CubeIcon />}
+                <span>{v.toUpperCase()}</span>
               </button>
             ))}
           </div>
@@ -1444,13 +1432,10 @@ export default function ContributionSkyline({
                     onFocus={() => setLegendLevel(i)}
                     onBlur={() => setLegendLevel(-1)}
                     onClick={() => setLegendLevel((l) => (l === i ? -1 : i))}
-                    className="h-[11px] w-[11px] cursor-pointer rounded-[2px] border-0 p-0 transition-[background-color,transform] duration-500 hover:scale-125 focus-visible:outline-2 focus-visible:outline-offset-1 motion-reduce:transition-none"
-                    style={{
-                      background: c,
-                      outlineColor: "var(--color-foreground, #171717)",
-                      boxShadow: "inset 0 0 0 1px rgba(127,127,127,0.12)",
-                    }}
-                  />
+                    className="contribution-level-button"
+                  >
+                    <span className="contribution-level-swatch" style={{ background: c }} />
+                  </button>
                 ))}
                 <span className="ml-0.5">{activePlatformKeys.length ? "Higher" : "More"}</span>
               </div>

@@ -1,15 +1,15 @@
-/**
- * Client service for real-time LeetCode profile data retrieval.
- */
+
+
+
 
 const API_BASE = import.meta.env.VITE_API_URL || "";
 
-/**
- * Fetches real-time LeetCode stats for a user handle.
- * @param {string} handle - LeetCode username (e.g. "alex_shah")
- * @param {Object} options - Options object
- * @param {boolean} [options.force=false] - Whether to bypass server cache
- */
+
+
+
+
+
+
 export async function fetchLiveLeetCodeStats(handle, options = {}) {
   const { force = false } = options;
 

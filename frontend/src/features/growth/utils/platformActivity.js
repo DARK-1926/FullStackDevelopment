@@ -43,7 +43,7 @@ export function buildPlatformActivity({ platformStats, monthlyActivity, recentLo
     }
   }
 
-  // Prefer live source coverage for connected platforms to avoid counting the same work twice.
+
   for (const day of monthlyActivity ?? []) {
     for (const [platformName, count] of Object.entries(day.platformCounts ?? {})) {
       const platform = platformName.toLowerCase().replace(/[^a-z]/g, "");
@@ -54,7 +54,7 @@ export function buildPlatformActivity({ platformStats, monthlyActivity, recentLo
     }
   }
 
-  // Older saved monthly totals may lack platform detail, so recover dates from retained manual logs.
+
   for (const log of recentLogs ?? []) {
     const platform = String(log.platform ?? "").toLowerCase().replace(/[^a-z]/g, "");
     const key = `${log.date}:${platform}`;

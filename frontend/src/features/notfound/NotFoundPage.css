@@ -46,7 +46,7 @@
   color: #171717;
 }
 
-/* Big 4 [Tic-Tac-Toe] 4 Layout */
+
 .not-found-stage {
   display: flex;
   align-items: center;
@@ -64,7 +64,7 @@
   pointer-events: none;
 }
 
-/* Tic Tac Toe Grid */
+
 .ttt-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -94,7 +94,7 @@
   cursor: default;
 }
 
-/* Grid Lines matching classic 3x3 */
+
 .ttt-cell:nth-child(1),
 .ttt-cell:nth-child(2),
 .ttt-cell:nth-child(3),
@@ -113,7 +113,7 @@
   border-right: 2.5px solid #171717;
 }
 
-/* X Piece (Player) */
+
 .ttt-mark-x {
   font-size: clamp(34px, 5vw, 48px);
   font-weight: 900;
@@ -122,7 +122,7 @@
   animation: popMark 0.18s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* O Piece (AI) */
+
 .ttt-mark-o {
   font-size: clamp(34px, 5vw, 48px);
   font-weight: 800;
@@ -131,7 +131,7 @@
   animation: popMark 0.18s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Center Ambient DevRhythm Placeholder (like the heart in the ref image, playable) */
+
 .ttt-placeholder-symbol {
   font-family: var(--font-mono, monospace);
   font-size: clamp(20px, 3vw, 28px);
@@ -169,7 +169,7 @@
   }
 }
 
-/* Game Status Banner */
+
 .ttt-status-text {
   font-family: var(--font-mono, monospace);
   font-size: 12px;
@@ -185,7 +185,7 @@
   color: #dc2626;
 }
 
-/* Action Controls matching screenshot brackets style */
+
 .not-found-actions {
   display: flex;
   align-items: center;
@@ -217,7 +217,7 @@
   transform: translateY(0);
 }
 
-/* Dark mode compatibility */
+
 :root[data-theme="dark"] .not-found-container,
 body.dark-mode .not-found-container {
   background: var(--bg-page, #090b0d);

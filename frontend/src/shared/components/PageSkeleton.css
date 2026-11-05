@@ -1,4 +1,4 @@
-/* Page Skeleton Loader Styles - Shimmering placeholder effect matching DevRhythm theme */
+
 
 .page-skeleton-container {
   width: 100%;
@@ -37,7 +37,7 @@
   }
 }
 
-/* Header Skeleton Block */
+
 .skeleton-header-block {
   display: flex;
   flex-direction: column;
@@ -58,7 +58,7 @@
   border-radius: 4px;
 }
 
-/* Metric Stats Row Skeleton */
+
 .skeleton-metrics-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -77,7 +77,7 @@
   justify-content: space-between;
 }
 
-/* Main Content Area Skeletons */
+
 .skeleton-content-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -112,7 +112,7 @@
   gap: 14px;
 }
 
-/* List / Feed Skeleton Rows */
+
 .skeleton-feed-rows {
   display: flex;
   flex-direction: column;

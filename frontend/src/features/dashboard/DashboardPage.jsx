@@ -1,8 +1,6 @@
 import {
-  Activity,
   Award,
   BarChart3,
-  CheckCircle2,
   ChevronRight,
   Code2,
   ExternalLink,
@@ -67,8 +65,6 @@ export function DashboardPage() {
     profile,
     user,
     growthStats,
-    dailyChallenge,
-    completeDailyChallenge,
     syncCodeChefData,
     syncGfgData,
     syncLeetCodeData,
@@ -76,8 +72,8 @@ export function DashboardPage() {
     syncCodeforcesData,
   } = useAppContext();
 
-  // State
-  const [timeRange, setTimeRange] = useState(14); // 7, 14, 30 days
+
+  const [timeRange, setTimeRange] = useState(14);
   const [hoveredPoint, setHoveredPoint] = useState(null);
   const [syncingPlatform, setSyncingPlatform] = useState(null);
   const [isSyncingAll, setIsSyncingAll] = useState(false);
@@ -99,14 +95,14 @@ export function DashboardPage() {
       : {}
   );
 
-  // Only display a platform snapshot fetched for the currently configured account.
+
   const leetcode = syncedForHandle(growthStats.leetcode, platformHandles.leetcode);
   const codeforces = syncedForHandle(growthStats.codeforces, platformHandles.codeforces);
   const codechef = syncedForHandle(growthStats.codechef, platformHandles.codechef);
   const geeksforgeeks = syncedForHandle(growthStats.geeksforgeeks ?? growthStats.gfg, platformHandles.geeksforgeeks);
   const github = syncedForHandle(growthStats.github, platformHandles.github);
 
-  // 1. Mathematically Sound Sum of Problems Solved Across Connected Platforms
+
   const platformProblemsSolved =
     (Number(leetcode.solved) || 0) +
     (Number(codeforces.solved) || 0) +
@@ -115,7 +111,7 @@ export function DashboardPage() {
 
   const totalProblemsSolved = platformProblemsSolved;
 
-  // 2. Dynamic Rolling Practice History Anchored to Today
+
   const activityMap = useMemo(() => {
     const list = growthStats.monthlyActivity || [];
     return new Map(
@@ -141,7 +137,7 @@ export function DashboardPage() {
     ).padStart(2, "0")}`;
   };
 
-  // Build rolling range array of days based on timeRange
+
   const trendDays = useMemo(() => {
     const list = [];
     for (let i = timeRange - 1; i >= 0; i -= 1) {
@@ -164,7 +160,7 @@ export function DashboardPage() {
     return list;
   }, [timeRange, today, activityMap, growthStats.todayCompletedCount]);
 
-  // Aggregate Metrics for Selected Range
+
   const rangeTotalProblems = useMemo(() => {
     return trendDays.reduce((sum, day) => sum + day.problems, 0);
   }, [trendDays]);
@@ -186,7 +182,7 @@ export function DashboardPage() {
     return peak;
   }, [trendDays]);
 
-  // SVG Chart Geometry
+
   const chartHeight = 150;
   const chartWidth = 720;
   const paddingX = 30;
@@ -226,7 +222,7 @@ export function DashboardPage() {
     return `${chartLinePath} L ${lastX},${baseline} L ${firstX},${baseline} Z`;
   }, [chartPoints, chartLinePath, innerHeight]);
 
-  // Sync Handlers
+
   const handleSyncPlatform = async (platformId) => {
     if (!user || !platformHandles[platformId]) return;
     setSyncingPlatform(platformId);
@@ -327,13 +323,10 @@ export function DashboardPage() {
   }, []);
 
   const longestStreak = growthStats.longestStreak ?? 28;
-  const dailyGoal = growthStats.dailyGoal ?? 2;
-  const todayCount = growthStats.todayCompletedCount ?? 0;
-  const goalProgress = Math.min(100, Math.round((todayCount / dailyGoal) * 100));
 
   return (
     <main className="page-content dashboard-page">
-      {/* 1. Header & Hero Command Deck */}
+
       <section className="dashboard-masthead" aria-labelledby="dashboard-title">
         <GridScan
           className="dashboard-masthead-gridscan"
@@ -366,9 +359,9 @@ export function DashboardPage() {
 
         </div>
 
-        {/* Hero High-Impact Metric Cards */}
+
         <div className="dashboard-hero-metrics" aria-label="Key Developer Metrics">
-          {/* Metric 1: Total Problems Solved */}
+
           <article className="dashboard-metric-card">
             <div className="dashboard-metric-head">
               <span className="dashboard-metric-label">TOTAL SOLVED</span>
@@ -384,7 +377,7 @@ export function DashboardPage() {
             </div>
           </article>
 
-          {/* Metric 2: Weekly Velocity */}
+
           <article className="dashboard-metric-card">
             <div className="dashboard-metric-head">
               <span className="dashboard-metric-label">PRACTICE VELOCITY</span>
@@ -401,7 +394,7 @@ export function DashboardPage() {
             </div>
           </article>
 
-          {/* Metric 3: Consistency Cadence */}
+
           <article className="dashboard-metric-card">
             <div className="dashboard-metric-head">
               <span className="dashboard-metric-label">CONSISTENCY</span>
@@ -418,7 +411,7 @@ export function DashboardPage() {
             </div>
           </article>
 
-          {/* Metric 4: Competitive Standing / Open Source */}
+
           <article className="dashboard-metric-card dashboard-metric-card--highlight">
             <div className="dashboard-metric-head">
               <span className="dashboard-metric-label">COMPETITIVE STANDING</span>
@@ -437,7 +430,7 @@ export function DashboardPage() {
         </div>
       </section>
 
-      {/* 2. Practice Rhythm & Velocity Hub */}
+
       <section className="dashboard-trend-section" aria-labelledby="rhythm-heading">
         <header className="dashboard-trend-header">
           <div className="dashboard-trend-title-block">
@@ -461,7 +454,7 @@ export function DashboardPage() {
         </header>
 
         <div className="dashboard-trend-grid">
-          {/* Interactive Line & Area Chart */}
+
           <div className="dashboard-chart-box">
             <div className="dashboard-chart-summary">
               <div className="chart-stat-item">
@@ -499,7 +492,7 @@ export function DashboardPage() {
                   </linearGradient>
                 </defs>
 
-                {/* Gridlines */}
+
                 {[0.25, 0.5, 0.75, 1].map((ratio) => {
                   const y = paddingY + innerHeight * (1 - ratio);
                   return (
@@ -514,11 +507,11 @@ export function DashboardPage() {
                   );
                 })}
 
-                {/* Area & Stroke */}
+
                 <path d={chartAreaPath} fill="url(#velocity-gradient)" />
                 <path d={chartLinePath} className="chart-path-line" />
 
-                {/* Points */}
+
                 {chartPoints.map((point, index) => {
                   const showLabel =
                     timeRange <= 14 ? true : index % 3 === 0 || index === chartPoints.length - 1;
@@ -553,81 +546,12 @@ export function DashboardPage() {
             </div>
           </div>
 
-          {/* Today's Focus & Daily Challenge Station */}
-          <div className="dashboard-focus-station">
-            {/* Daily Goal Progress */}
-            <div className="focus-goal-card">
-              <div className="focus-card-head">
-                <span className="focus-card-kicker">TODAY'S TARGET</span>
-                <span className="dashboard-metric-icon">
-                  <Activity size={14} color="#10b981" />
-                </span>
-              </div>
-              <div className="goal-progress-wrap">
-                <div className="goal-numbers">
-                  <span className="goal-current">{todayCount}</span>
-                  <span className="goal-target">/ {dailyGoal}</span>
-                </div>
-                <div className="goal-bar-outer" role="progressbar" aria-valuenow={todayCount} aria-valuemin={0} aria-valuemax={dailyGoal}>
-                  <div className="goal-bar-fill" style={{ width: `${goalProgress}%` }} />
-                </div>
-              </div>
-              <p className="focus-goal-caption">
-                {todayCount >= dailyGoal
-                  ? "Daily goal reached! Keep going to accelerate velocity."
-                  : `Solve ${dailyGoal - todayCount} more problem(s) today to solidify your streak.`}
-              </p>
-            </div>
-
-            {/* Daily Challenge Card */}
-            <div className="focus-challenge-card">
-              <div className="focus-card-head">
-                <span className="focus-card-kicker">DAILY CHALLENGE</span>
-                <span className="dashboard-kicker--accent">{dailyChallenge?.platform || "LeetCode"}</span>
-              </div>
-
-              <div className="challenge-title">
-                {dailyChallenge?.title || "Minimum Operations to Reduce X to Zero"}
-              </div>
-
-              <div className="challenge-tags">
-                <span className="challenge-tag challenge-tag--medium">
-                  {dailyChallenge?.difficulty || "Medium"}
-                </span>
-                <span className="challenge-tag challenge-tag--topic">
-                  {dailyChallenge?.category || "Sliding Window"}
-                </span>
-              </div>
-
-              <div className="challenge-actions">
-                <button
-                  type="button"
-                  className={`challenge-btn-done ${dailyChallenge?.completed ? "is-completed" : ""}`}
-                  onClick={completeDailyChallenge}
-                  disabled={dailyChallenge?.completed}
-                >
-                  <CheckCircle2 size={13} />
-                  {dailyChallenge?.completed ? "Completed" : "Mark Solved"}
-                </button>
-
-                <a
-                  href={dailyChallenge?.link || "https://leetcode.com"}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="challenge-btn-link"
-                >
-                  Open Problem
-                  <ExternalLink size={12} />
-                </a>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* 3. Contribution Skyline */}
+
       <section className="dashboard-workspace" aria-label="Practice Activity">
-        {/* 3D Skyline Canvas Panel */}
+
         <div className="dashboard-skyline-panel">
           <div className="dashboard-panel-bar">
             <span className="dashboard-panel-title">
@@ -660,7 +584,7 @@ export function DashboardPage() {
 
       </section>
 
-      {/* 4. Connected Platforms Pro Cards */}
+
       <section ref={horizontalSectionRef} className="dashboard-platforms-section dashboard-platforms-horizontal" aria-labelledby="platforms-heading">
         <div ref={horizontalStickyRef} className="dashboard-platforms-sticky">
         <header className="dashboard-platforms-head">
@@ -681,7 +605,7 @@ export function DashboardPage() {
 
         <div ref={horizontalViewportRef} className="dashboard-platforms-viewport">
         <div ref={horizontalTrackRef} className="dashboard-platforms-grid">
-          {/* Card 1: LeetCode */}
+
           <article tabIndex={0} className="platform-pro-card" aria-label="LeetCode statistics. Hover or focus to reveal details." style={{ "--platform-color": PLATFORM_META.leetcode.color, "--platform-light-bg": PLATFORM_META.leetcode.lightBg }}>
             <div className="platform-card-backdrop" aria-hidden="true"><img src={PLATFORM_META.leetcode.logo} alt="" /></div>
             <div className="platform-accent-stripe" />
@@ -739,7 +663,7 @@ export function DashboardPage() {
             </div>
           </article>
 
-          {/* Card 2: Codeforces */}
+
           <article tabIndex={0} className="platform-pro-card" aria-label="Codeforces statistics. Hover or focus to reveal details." style={{ "--platform-color": PLATFORM_META.codeforces.color, "--platform-light-bg": PLATFORM_META.codeforces.lightBg }}>
             <div className="platform-card-backdrop" aria-hidden="true"><img src={PLATFORM_META.codeforces.logo} alt="" /></div>
             <div className="platform-accent-stripe" />
@@ -797,7 +721,7 @@ export function DashboardPage() {
             </div>
           </article>
 
-          {/* Card 3: CodeChef */}
+
           <article tabIndex={0} className="platform-pro-card" aria-label="CodeChef statistics. Hover or focus to reveal details." style={{ "--platform-color": PLATFORM_META.codechef.color, "--platform-light-bg": PLATFORM_META.codechef.lightBg }}>
             <div className="platform-card-backdrop" aria-hidden="true"><img src={PLATFORM_META.codechef.logo} alt="" /></div>
             <div className="platform-accent-stripe" />
@@ -855,7 +779,7 @@ export function DashboardPage() {
             </div>
           </article>
 
-          {/* Card 4: GeeksforGeeks */}
+
           <article tabIndex={0} className="platform-pro-card" aria-label="GeeksforGeeks statistics. Hover or focus to reveal details." style={{ "--platform-color": PLATFORM_META.geeksforgeeks.color, "--platform-light-bg": PLATFORM_META.geeksforgeeks.lightBg }}>
             <div className="platform-card-backdrop" aria-hidden="true"><img src={PLATFORM_META.geeksforgeeks.logo} alt="" /></div>
             <div className="platform-accent-stripe" />
@@ -913,7 +837,7 @@ export function DashboardPage() {
             </div>
           </article>
 
-          {/* Card 5: GitHub */}
+
           <article tabIndex={0} className="platform-pro-card" aria-label="GitHub statistics. Hover or focus to reveal details." style={{ "--platform-color": PLATFORM_META.github.color, "--platform-light-bg": PLATFORM_META.github.lightBg }}>
             <div className="platform-card-backdrop" aria-hidden="true"><img src={PLATFORM_META.github.logo} alt="" /></div>
             <div className="platform-accent-stripe" />

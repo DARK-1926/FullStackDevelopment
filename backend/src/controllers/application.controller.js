@@ -2,9 +2,9 @@ import { getMongoStatus } from "../config/db.js";
 import { Application } from "../models/Application.js";
 import { fallbackStore } from "../store/fallbackStore.js";
 
-/**
- * GET /api/applications
- */
+
+
+
 export async function getApplications(req, res) {
   try {
     const userId = req.user?.id;
@@ -27,9 +27,9 @@ export async function getApplications(req, res) {
   }
 }
 
-/**
- * POST /api/applications
- */
+
+
+
 export async function createApplication(req, res) {
   try {
     const userId = req.user?.id || "guest-user";
@@ -80,9 +80,9 @@ export async function createApplication(req, res) {
   }
 }
 
-/**
- * PATCH /api/applications/:id
- */
+
+
+
 export async function updateApplication(req, res) {
   try {
     const { id } = req.params;
@@ -113,9 +113,9 @@ export async function updateApplication(req, res) {
   }
 }
 
-/**
- * DELETE /api/applications/:id
- */
+
+
+
 export async function deleteApplication(req, res) {
   try {
     const { id } = req.params;

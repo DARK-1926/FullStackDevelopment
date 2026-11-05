@@ -25,7 +25,7 @@ export function optionalAuth(req, res, next) {
       const decoded = jwt.verify(token, JWT_SECRET);
       req.user = decoded;
     } catch (_err) {
-      // In optional auth, invalid token is treated as unauthenticated guest
+      req.user = null;
     }
   }
   next();

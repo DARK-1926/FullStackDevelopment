@@ -7,8 +7,8 @@ describe("Codeforces Service", () => {
     expect(isValidHandle("Petr")).toBe(true);
     expect(isValidHandle("a_b-c")).toBe(true);
     expect(isValidHandle("")).toBe(false);
-    expect(isValidHandle("ab")).toBe(false); // too short (<3)
-    expect(isValidHandle("a".repeat(25))).toBe(false); // too long (>24)
+    expect(isValidHandle("ab")).toBe(false);
+    expect(isValidHandle("a".repeat(25))).toBe(false);
   });
 
   it("handles empty or invalid handle in getCodeforcesProfile", async () => {

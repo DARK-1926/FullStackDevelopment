@@ -3,9 +3,9 @@ import { Opportunity } from "../models/Opportunity.js";
 import { fallbackStore } from "../store/fallbackStore.js";
 import { seedOpportunities } from "../data/seedOpportunities.js";
 
-/**
- * GET /api/opportunities
- */
+
+
+
 export async function getOpportunities(req, res) {
   try {
     let opportunities = [];
@@ -13,7 +13,7 @@ export async function getOpportunities(req, res) {
     if (getMongoStatus()) {
       opportunities = await Opportunity.find().sort({ deadlineDate: 1 });
       if (opportunities.length === 0) {
-        // Seed MongoDB if currently empty
+
         await Opportunity.insertMany(seedOpportunities);
         opportunities = await Opportunity.find().sort({ deadlineDate: 1 });
       }
@@ -21,7 +21,7 @@ export async function getOpportunities(req, res) {
       opportunities = fallbackStore.getOpportunities();
     }
 
-    // Optional query filtering
+
     const { type, locationType, q } = req.query;
     let filtered = [...opportunities];
 
@@ -52,9 +52,9 @@ export async function getOpportunities(req, res) {
   }
 }
 
-/**
- * GET /api/opportunities/:id
- */
+
+
+
 export async function getOpportunityById(req, res) {
   try {
     const { id } = req.params;

@@ -3,16 +3,16 @@ import { MONGODB_URI } from "./env.js";
 
 let isMongoConnecting = null;
 
-/**
- * Returns the current MongoDB connection status.
- */
+
+
+
 export function getMongoStatus() {
   return mongoose.connection.readyState === 1;
 }
 
-/**
- * Connects to MongoDB with connection caching for serverless environments.
- */
+
+
+
 export async function connectDB() {
   if (mongoose.connection.readyState === 1) {
     return true;

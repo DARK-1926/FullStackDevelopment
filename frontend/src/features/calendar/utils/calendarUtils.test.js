@@ -11,7 +11,7 @@ describe("calendarUtils", () => {
   it("normalizes date keys properly without UTC shifts", () => {
     expect(normalizeDateKey("2026-11-17")).toBe("2026-11-17");
     expect(normalizeDateKey("2026-11-17T14:30:00Z")).toBe("2026-11-17");
-    const d = new Date(2026, 10, 15); // Nov 15, 2026
+    const d = new Date(2026, 10, 15);
     expect(normalizeDateKey(d)).toBe("2026-11-15");
   });
 
@@ -21,8 +21,8 @@ describe("calendarUtils", () => {
   });
 
   it("generates a 7-column calendar grid with adjacent month days", () => {
-    const grid = generateMonthGrid(2026, 10); // Nov 2026
-    // Nov 1, 2026 is Sunday, Nov 30 is Monday -> 35 cells
+    const grid = generateMonthGrid(2026, 10);
+
     expect(grid.length % 7).toBe(0);
     const nov1 = grid.find((c) => c.dateKey === "2026-11-01");
     expect(nov1).toBeDefined();

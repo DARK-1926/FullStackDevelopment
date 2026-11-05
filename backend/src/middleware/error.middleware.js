@@ -1,8 +1,8 @@
 import { ApiError } from "../utils/ApiError.js";
 
-/**
- * Global error handling middleware.
- */
+
+
+
 export function errorHandler(err, req, res, _next) {
   if (req?.headers?.origin) {
     res.setHeader("Access-Control-Allow-Origin", req.headers.origin);

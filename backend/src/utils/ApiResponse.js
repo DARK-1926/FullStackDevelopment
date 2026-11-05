@@ -1,6 +1,6 @@
-/**
- * Standard API response wrapper for consistent output structures.
- */
+
+
+
 export class ApiResponse {
   constructor(statusCode, data, message = "Success") {
     this.statusCode = statusCode;

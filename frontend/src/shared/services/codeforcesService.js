@@ -1,8 +1,8 @@
 const API_BASE = "/api/platforms/codeforces";
 
-/**
- * Client-side service to communicate with backend Codeforces sync API.
- */
+
+
+
 export async function fetchLiveCodeforcesStats(handle, options = {}) {
   if (!handle) {
     return { success: false, error: "Handle is required." };

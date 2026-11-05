@@ -1,11 +1,11 @@
-/**
- * Real-time GitHub profile information retrieval service.
- * Fetches verified public statistics via GitHub's public REST API
- * and contribution graph with resilient in-memory caching and sanitization.
- */
+
+
+
+
+
 
 const cache = new Map();
-const CACHE_TTL_MS = 3 * 60 * 1000; // 3-minute in-memory cache to prevent rate-limiting
+const CACHE_TTL_MS = 3 * 60 * 1000;
 
 const API_HEADERS = {
   Accept: "application/vnd.github.v3+json",
@@ -19,21 +19,21 @@ const BROWSER_HEADERS = {
   "Accept-Language": "en-US,en;q=0.9",
 };
 
-/**
- * Validates a GitHub username format.
- * GitHub usernames may only contain alphanumeric characters or single hyphens,
- * cannot begin or end with a hyphen, and are at most 39 characters.
- */
+
+
+
+
+
 export function isValidHandle(handle) {
   if (!handle || typeof handle !== "string") return false;
   const trimmed = handle.trim();
   return /^[a-zA-Z0-9](?:[a-zA-Z0-9]|-(?=[a-zA-Z0-9])){0,38}$/.test(trimmed);
 }
 
-/**
- * Fetches and parses live GitHub statistics for a given username.
- * Accepts options: { forceRefresh?: boolean }
- */
+
+
+
+
 export async function getGitHubProfile(handle, options = {}) {
   const { forceRefresh = false } = options;
 
@@ -48,7 +48,7 @@ export async function getGitHubProfile(handle, options = {}) {
   const cacheKey = normalizedHandle.toLowerCase();
   const now = Date.now();
 
-  // Return cached entry if fresh
+
   if (!forceRefresh && cache.has(cacheKey)) {
     const cached = cache.get(cacheKey);
     if (now - cached.timestamp < CACHE_TTL_MS) {
@@ -57,7 +57,7 @@ export async function getGitHubProfile(handle, options = {}) {
   }
 
   try {
-    // 1. Fetch user profile from GitHub REST API
+
     const userRes = await fetch(`https://api.github.com/users/${encodeURIComponent(normalizedHandle)}`, {
       headers: API_HEADERS,
       signal: AbortSignal.timeout ? AbortSignal.timeout(8000) : undefined,
@@ -84,7 +84,7 @@ export async function getGitHubProfile(handle, options = {}) {
     const avatar = userData.avatar_url || null;
     const bio = userData.bio || "";
 
-    // 2. Fetch public contribution calendar to calculate total contributions and streaks
+
     let contributions = null;
     let currentStreak = null;
     let longestStreak = null;
@@ -101,13 +101,13 @@ export async function getGitHubProfile(handle, options = {}) {
       if (contribRes.ok) {
         const html = await contribRes.text();
 
-        // Match total contributions e.g. "671 contributions in the last year"
+
         const contribMatch = html.match(/([0-9,]+)\s+contributions/i);
         if (contribMatch) {
           contributions = parseInt(contribMatch[1].replace(/,/g, ""), 10) || 0;
         }
 
-        // Match all contribution days
+
         const dayMatches = [...html.matchAll(/data-date="([0-9-]+)"[^>]*data-level="([0-9])"/g)];
         if (dayMatches.length > 0) {
           const days = dayMatches
@@ -116,12 +116,12 @@ export async function getGitHubProfile(handle, options = {}) {
           currentStreak = 0;
           longestStreak = 0;
 
-          // Calculate current streak
+
           for (let i = days.length - 1; i >= 0; i--) {
             if (days[i].level > 0) {
               currentStreak++;
             } else {
-              // Allow today to have 0 commits yet if checking earlier in the day
+
               if (i === days.length - 1) {
                 continue;
               }
@@ -129,7 +129,7 @@ export async function getGitHubProfile(handle, options = {}) {
             }
           }
 
-          // Calculate longest streak
+
           let tempStreak = 0;
           for (const d of days) {
             if (d.level > 0) {
@@ -145,7 +145,7 @@ export async function getGitHubProfile(handle, options = {}) {
       console.warn("Could not fetch GitHub contributions HTML:", contribErr.message);
     }
 
-    // 3. Fetch recent public events to extract real-time push, PR, and issue activity logs
+
     let recentEvents = [];
     try {
       const eventsRes = await fetch(
@@ -235,7 +235,7 @@ export async function getGitHubProfile(handle, options = {}) {
       syncedAt: new Date().toISOString(),
     };
 
-    // Store in cache
+
     cache.set(cacheKey, { timestamp: now, data });
 
     return data;

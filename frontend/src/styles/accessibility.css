@@ -1,13 +1,13 @@
-/* ==========================================================================
-   Accessibility (a11y) Master Stylesheet
-   Compliant with WCAG 2.1 / 2.2 AA standards
-   Optimized for:
-   - Screen Reader users (NVDA, JAWS, VoiceOver, TalkBack)
-   - Keyboard-only navigation & motor impaired users
-   - Low-vision, high-contrast, & photosensitive/vestibular users
-   ========================================================================== */
 
-/* 1. Screen Reader Only Utility (.sr-only / .visually-hidden) */
+
+
+
+
+
+
+
+
+
 .sr-only,
 .visually-hidden {
   position: absolute !important;
@@ -21,7 +21,7 @@
   border: 0 !important;
 }
 
-/* Allow focusable elements inside .sr-only to become visible on focus */
+
 .sr-only-focusable:active,
 .sr-only-focusable:focus {
   position: static !important;
@@ -33,7 +33,7 @@
   white-space: normal !important;
 }
 
-/* 2. Skip to Main Content Link (WCAG 2.4.1 Bypass Blocks) */
+
 .skip-to-content {
   position: fixed;
   top: -100px;
@@ -62,19 +62,19 @@
   outline-offset: 2px !important;
 }
 
-/* 3. Universal High-Visibility Focus Rings (WCAG 2.4.7 Focus Visible & 2.4.11 Focus Appearance) */
+
 :focus-visible {
   outline: 2.5px solid var(--color-primary, #6366f1) !important;
   outline-offset: 2.5px !important;
   box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.25) !important;
 }
 
-/* Remove default blur/faint outlines */
+
 :focus:not(:focus-visible) {
   outline: none;
 }
 
-/* Inputs, Textareas, Selects focus indicator */
+
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
@@ -83,7 +83,7 @@ textarea:focus-visible {
   border-color: var(--color-primary, #6366f1) !important;
 }
 
-/* 4. Touch & Click Target Size Assistance (WCAG 2.5.5 / 2.5.8 Target Size) */
+
 button,
 a,
 input[type="button"],
@@ -96,7 +96,7 @@ input[type="submit"],
   justify-content: center;
 }
 
-/* Close buttons, icon buttons touch target safety */
+
 .close-btn,
 .icon-btn,
 .calendar-nav-icon-btn {
@@ -104,7 +104,7 @@ input[type="submit"],
   min-height: 40px !important;
 }
 
-/* 5. Reduced Motion for Vestibular & Seizure Safety (WCAG 2.3.3) */
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -126,7 +126,7 @@ input[type="submit"],
   }
 }
 
-/* 6. Windows High Contrast Mode / Forced Colors Support */
+
 @media (forced-colors: active) {
   .site-nav-link.is-current,
   .nav-item.active,
@@ -147,7 +147,7 @@ input[type="submit"],
   }
 }
 
-/* 7. Dialog & Backdrop Focus Trap Styling */
+
 .modal-overlay[role="dialog"] {
   backdrop-filter: blur(4px);
 }

@@ -23,14 +23,14 @@ export function AIAssistantPage() {
 
   const [activeTab, setActiveTab] = useState("matcher");
 
-  // Resume Matcher State
+
   const [selectedOppId, setSelectedOppId] = useState(
     selectedOpportunityForAnalysis?.id || opportunities[0]?.id || "",
   );
   const [customJD, setCustomJD] = useState("");
   const [useCustomJD, setUseCustomJD] = useState(false);
 
-  // Cold Email Drafter State
+
   const [recipientType, setRecipientType] = useState("Recruiter");
   const [outreachTone, setOutreachTone] = useState("Professional");
   const [targetCompany, setTargetCompany] = useState(
@@ -40,11 +40,11 @@ export function AIAssistantPage() {
     selectedOpportunityForAnalysis?.title || opportunities[0]?.title || "Software Engineering Intern",
   );
 
-  // Results & Loading State
+
   const [draftResult, setDraftResult] = useState(null);
   const [copied, setCopied] = useState(false);
 
-  // Compute Current Opportunity & Local Match Fallback
+
   const currentOpp = opportunities.find((o) => o.id === selectedOppId);
   const targetSkills = useCustomJD
     ? customJD
@@ -58,11 +58,11 @@ export function AIAssistantPage() {
   const localMatchAnalysis = analyzeResumeJDMatch(profile.skills, targetSkills, roleTitle);
   const displayMatchAnalysis = localMatchAnalysis;
 
-  // Live or Local Outreach Generation Trigger
+
   const handleGenerateDraft = async () => {
     setCopied(false);
 
-    // Generate a personalized draft from the student's profile.
+
     const draft = generateOutreachDraft({
       studentName: profile.name,
       university: profile.university,
@@ -76,16 +76,21 @@ export function AIAssistantPage() {
     setDraftResult(draft);
   };
 
-  const handleCopyDraft = () => {
+  const handleCopyDraft = async () => {
     if (!draftResult) return;
-    navigator.clipboard.writeText(`Subject: ${draftResult.subject}\n\n${draftResult.body}`);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    try {
+      await navigator.clipboard.writeText(`Subject: ${draftResult.subject}\n\n${draftResult.body}`);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      console.error("Could not copy the outreach draft:", error);
+      setCopied(false);
+    }
   };
 
   return (
     <main className="page-content">
-      {/* Page Heading */}
+
       <div className="page-heading">
         <div>
           <p className="eyebrow">Career tools</p>
@@ -94,7 +99,7 @@ export function AIAssistantPage() {
         </div>
       </div>
 
-      {/* Tabs */}
+
       <div className="tab-bar">
         <button
           className={`tab-btn ${activeTab === "matcher" ? "active" : ""}`}
@@ -117,7 +122,7 @@ export function AIAssistantPage() {
 
       {activeTab === "matcher" ? (
         <div className="content-grid">
-          {/* Left: Input Selection */}
+
           <div className="panel">
             <div className="panel-heading">
               <div>
@@ -187,7 +192,7 @@ export function AIAssistantPage() {
             )}
 
 
-            {/* Profile Skills Preview */}
+
             <div style={{ borderTop: "1px solid var(--color-border-subtle)", paddingTop: 16 }}>
               <span style={{ fontSize: 12, fontWeight: 700, color: "var(--color-primary)", display: "block", marginBottom: 8 }}>
                 Your Declared Profile Skills ({profile.skills.length})
@@ -202,7 +207,7 @@ export function AIAssistantPage() {
             </div>
           </div>
 
-          {/* Right: Match Analysis Output */}
+
           <div className="panel">
             <div className="panel-heading">
               <div>
@@ -282,9 +287,9 @@ export function AIAssistantPage() {
           </div>
         </div>
       ) : (
-        /* Cold Email Drafter Tab */
+
         <div className="content-grid">
-          {/* Controls */}
+
           <div className="panel">
             <div className="panel-heading">
               <div>
@@ -352,7 +357,7 @@ export function AIAssistantPage() {
             </button>
           </div>
 
-          {/* Generated Draft Preview */}
+
           <div className="panel">
             <div className="panel-heading">
               <div>

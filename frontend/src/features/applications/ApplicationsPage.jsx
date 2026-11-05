@@ -29,13 +29,13 @@ export function ApplicationsPage() {
     createManualApplication,
   } = useAppContext();
 
-  // Drag and Drop state (Scratch-inspired tactile block snapping)
+
   const [draggedAppId, setDraggedAppId] = useState(null);
   const [dragOverColumn, setDragOverColumn] = useState(null);
 
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
-  // Close add modal on Escape key for keyboard/screen reader users
+
   useEffect(() => {
     if (!isAddModalOpen) return;
     const handleKeyDown = (e) => {
@@ -47,7 +47,7 @@ export function ApplicationsPage() {
   const [editingNotesId, setEditingNotesId] = useState(null);
   const [tempNotes, setTempNotes] = useState("");
 
-  // New application form state
+
   const [newCompany, setNewCompany] = useState("");
   const [newRole, setNewRole] = useState("");
   const [newLocation, setNewLocation] = useState("Remote");
@@ -69,7 +69,7 @@ export function ApplicationsPage() {
       notes: newNotes.trim() || "Tracked manually",
     });
 
-    // Reset and close
+
     setNewCompany("");
     setNewRole("");
     setNewNotes("");
@@ -82,7 +82,7 @@ export function ApplicationsPage() {
     setEditingNotesId(null);
   };
 
-  // Drag and drop event handlers
+
   const dragLeaveTimeoutRef = useRef(null);
 
   const handleDragStart = (e, appId) => {
@@ -90,7 +90,7 @@ export function ApplicationsPage() {
     e.dataTransfer.effectAllowed = "move";
     e.dataTransfer.setData("text/plain", appId);
 
-    // Set custom clean drag image preview so the browser doesn't snapshot a glitchy rotated card
+
     const target = e.currentTarget;
     if (e.dataTransfer.setDragImage) {
       const rect = target.getBoundingClientRect();
@@ -134,7 +134,7 @@ export function ApplicationsPage() {
   };
 
   const handleDragLeave = (e, columnKey) => {
-    // Only clear if actually leaving the column container to prevent jitter from child elements
+
     const related = e.relatedTarget;
     if (e.currentTarget && e.currentTarget.contains(related)) {
       return;
@@ -159,10 +159,9 @@ export function ApplicationsPage() {
 
   return (
     <main className="page-content">
-      {/* Page Heading */}
+
       <div className="page-heading applications-heading">
         <div>
-          <p className="eyebrow">Your search</p>
           <h1>Applications</h1>
           <p className="muted">
             Organize your internship and job applications across every recruitment stage.
@@ -179,7 +178,7 @@ export function ApplicationsPage() {
         </div>
       </div>
 
-      {/* Scratch-Inspired Kanban Board */}
+
       <div className="tracker-board applications-board" aria-label="Application stages kanban board">
         {STATUS_COLUMNS.map((column) => {
           const colApps = applications.filter((app) => app.status === column.key);
@@ -210,7 +209,7 @@ export function ApplicationsPage() {
                 <span className="column-badge">{colApps.length}</span>
               </div>
 
-              {/* Slot placeholder during drag over */}
+
               {isDragOver && draggedAppId && (
                 <div className="drag-placeholder-slot">
                   <span>✨ Snap block to {column.label}</span>
@@ -274,7 +273,7 @@ export function ApplicationsPage() {
                         <Calendar size={12} /> Due: {app.deadline}
                       </div>
 
-                      {/* Notes preview or edit */}
+
                       {editingNotesId === app.id ? (
                         <div style={{ display: "flex", flexDirection: "column", gap: 6, marginTop: 4 }}>
                           <textarea
@@ -313,7 +312,7 @@ export function ApplicationsPage() {
                         </div>
                       )}
 
-                      {/* Move stage selector dropdown & link */}
+
                       <div className="scratch-card-footer">
                         <select
                           className="scratch-stage-select"
@@ -353,7 +352,7 @@ export function ApplicationsPage() {
         })}
       </div>
 
-      {/* Add Application Modal */}
+
       {isAddModalOpen && createPortal(
         <div
           className="modal-overlay applications-modal-overlay"

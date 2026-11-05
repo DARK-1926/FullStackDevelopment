@@ -9,9 +9,9 @@ function getAuthHeaders() {
   return headers;
 }
 
-/**
- * Fetch applications from backend API.
- */
+
+
+
 export async function fetchApplications() {
   const url = `${API_BASE}/api/applications`;
   try {
@@ -29,9 +29,9 @@ export async function fetchApplications() {
   }
 }
 
-/**
- * Create a new application in backend API.
- */
+
+
+
 export async function createRemoteApplication(appData) {
   const url = `${API_BASE}/api/applications`;
   try {
@@ -51,9 +51,9 @@ export async function createRemoteApplication(appData) {
   }
 }
 
-/**
- * Update an application status or notes in backend API.
- */
+
+
+
 export async function updateRemoteApplication(id, updates) {
   const url = `${API_BASE}/api/applications/${encodeURIComponent(id)}`;
   try {
@@ -73,9 +73,9 @@ export async function updateRemoteApplication(id, updates) {
   }
 }
 
-/**
- * Delete an application from backend API.
- */
+
+
+
 export async function deleteRemoteApplication(id) {
   const url = `${API_BASE}/api/applications/${encodeURIComponent(id)}`;
   try {

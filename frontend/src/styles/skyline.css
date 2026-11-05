@@ -1,4 +1,4 @@
-/* Compatibility utility styles for Contribution Skyline component */
+
 :root {
   --color-background: var(--bg-card, #ffffff);
   --color-foreground: var(--color-text-main, #202923);
@@ -106,8 +106,8 @@
 .duration-150 { transition-duration: 150ms; }
 .hover\:scale-125:hover { transform: scale(1.25); }
 
-/* Explicit layout for the skyline's side statistics. These were originally
-   Tailwind arbitrary grid utilities, which this project does not generate. */
+
+
 .skyline-stat-inline {
   display: grid;
   grid-template-columns: max-content max-content;

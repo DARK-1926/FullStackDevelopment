@@ -1,8 +1,8 @@
 const API_BASE = import.meta.env.VITE_API_URL || "";
 
-/**
- * Fetch opportunities from backend API with fallback support.
- */
+
+
+
 export async function fetchOpportunities(filters = {}) {
   const params = new URLSearchParams();
   if (filters.type && filters.type !== "All") params.append("type", filters.type);
@@ -26,9 +26,9 @@ export async function fetchOpportunities(filters = {}) {
   }
 }
 
-/**
- * Fetch a single opportunity by id.
- */
+
+
+
 export async function fetchOpportunityById(id) {
   const url = `${API_BASE}/api/opportunities/${encodeURIComponent(id)}`;
   try {

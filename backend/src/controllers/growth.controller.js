@@ -2,9 +2,9 @@ import { getMongoStatus } from "../config/db.js";
 import { GrowthLog } from "../models/GrowthLog.js";
 import { fallbackStore } from "../store/fallbackStore.js";
 
-/**
- * POST /api/growth/log
- */
+
+
+
 export async function createLog(req, res) {
   try {
     const { platform, problemsSolved, notes } = req.body || {};
@@ -45,9 +45,9 @@ export async function createLog(req, res) {
   }
 }
 
-/**
- * GET /api/growth/logs
- */
+
+
+
 export async function getLogs(req, res) {
   try {
     let logs = [];

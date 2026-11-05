@@ -200,8 +200,8 @@ const PillNav = ({
     stretch: clamp(stretch, 0, 1)
   };
   const settingsRef = useRef(settings);
-  // Keep event and animation callbacks in sync with the latest rendered props.
-  // eslint-disable-next-line react-hooks/refs
+
+
   settingsRef.current = settings;
 
   const palette = THEMES[theme] ?? THEMES.dark;
@@ -603,8 +603,8 @@ const PillNav = ({
   }, [collapsed, joined]);
 
   useEffect(() => {
-    // Reset the mobile menu if the viewport grows back to the desktop layout.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+
+
     if (!collapsed && open) setOpen(false);
   }, [collapsed, open]);
 
@@ -638,7 +638,7 @@ const PillNav = ({
       });
     } else {
       if (reduce) {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
+
         setPanelShown(false);
         return undefined;
       }

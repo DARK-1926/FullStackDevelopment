@@ -1,10 +1,10 @@
-/**
- * Real-time GeeksforGeeks (GFG) profile information retrieval service.
- * Fetches practice submissions and public profile statistics with resilient caching.
- */
+
+
+
+
 
 const cache = new Map();
-const CACHE_TTL_MS = 3 * 60 * 1000; // 3 minutes cache to avoid rate-limiting
+const CACHE_TTL_MS = 3 * 60 * 1000;
 
 const BROWSER_HEADERS = {
   "User-Agent":
@@ -14,20 +14,20 @@ const BROWSER_HEADERS = {
   "Accept-Language": "en-US,en;q=0.9",
 };
 
-/**
- * Validates a GeeksforGeeks handle format.
- * Handles typically contain 2-40 alphanumeric characters, underscores, dots, or hyphens.
- */
+
+
+
+
 export function isValidHandle(handle) {
   if (!handle || typeof handle !== "string") return false;
   const trimmed = handle.trim();
   return /^[a-zA-Z0-9_.-]{2,40}$/.test(trimmed);
 }
 
-/**
- * Fetches and parses live GeeksforGeeks statistics for a given handle.
- * Accepts options: { forceRefresh?: boolean }
- */
+
+
+
+
 export async function getGfgProfile(handle, options = {}) {
   const { forceRefresh = false } = options;
 
@@ -41,7 +41,7 @@ export async function getGfgProfile(handle, options = {}) {
   const normalizedHandle = handle.trim().toLowerCase();
   const now = Date.now();
 
-  // Return cached result if available and fresh
+
   if (!forceRefresh && cache.has(normalizedHandle)) {
     const cached = cache.get(normalizedHandle);
     if (now - cached.timestamp < CACHE_TTL_MS) {
@@ -60,7 +60,7 @@ export async function getGfgProfile(handle, options = {}) {
   let longestStreak = 0;
   let practiceApiSucceeded = false;
 
-  // 1. Fetch practice submissions API
+
   try {
     const subRes = await fetch("https://practiceapi.geeksforgeeks.org/api/v1/user/problems/submissions/", {
       method: "POST",
@@ -89,7 +89,7 @@ export async function getGfgProfile(handle, options = {}) {
           } else if (lowerDiff.includes("med")) {
             medCount += count;
           } else {
-            easyCount += count; // School, Basic, Easy
+            easyCount += count;
           }
 
           for (const prob of Object.values(probs)) {
@@ -108,11 +108,11 @@ export async function getGfgProfile(handle, options = {}) {
         difficultyBreakdown = { easy: easyCount, medium: medCount, hard: hardCount };
       }
     }
-  } catch (_err) {
-    // If practice API timed out or errored, proceed to profile HTML fallback
+  } catch (error) {
+    console.warn("Could not fetch GeeksforGeeks submissions:", error);
   }
 
-  // 2. Fetch profile page HTML
+
   try {
     const profRes = await fetch(`https://www.geeksforgeeks.org/user/${encodeURIComponent(normalizedHandle)}/`, {
       headers: BROWSER_HEADERS,
@@ -123,7 +123,7 @@ export async function getGfgProfile(handle, options = {}) {
     if (profRes.ok) {
       const html = await profRes.text();
 
-      // Check if user exists on GeeksforGeeks
+
       if (
         html.includes("User not found") ||
         html.includes("undefined   | GeeksforGeeks Profile") ||
@@ -181,7 +181,7 @@ export async function getGfgProfile(handle, options = {}) {
     }
   }
 
-  // If neither API nor HTML confirmed a valid profile
+
   if (!practiceApiSucceeded && score == null && problemsSolved == null && !instituteName) {
     return {
       success: false,

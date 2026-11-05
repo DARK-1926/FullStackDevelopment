@@ -9,7 +9,7 @@ export function PageSkeleton({ type = "default" }) {
           <div className="skeleton-shimmer skeleton-subtitle" />
         </div>
 
-        {/* 4 Kanban Columns Skeleton */}
+
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
           {[1, 2, 3, 4].map((i) => (
             <div
@@ -68,7 +68,7 @@ export function PageSkeleton({ type = "default" }) {
     );
   }
 
-  // Default Overview / Dashboard Skeleton
+
   return (
     <div className="page-skeleton-container" aria-label="Loading dashboard" role="status">
       <div className="skeleton-header-block">

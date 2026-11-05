@@ -1,6 +1,6 @@
-/**
- * Standard API error class for structured HTTP error responses.
- */
+
+
+
 export class ApiError extends Error {
   constructor(statusCode, message = "Something went wrong", errors = [], stack = "") {
     super(message);

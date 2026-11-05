@@ -1,8 +1,8 @@
 import { getAllRealContests } from "../services/contestService.js";
 
-/**
- * GET /api/contests
- */
+
+
+
 export async function getContests(req, res) {
   try {
     const force = req.query.force === "true";

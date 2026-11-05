@@ -87,7 +87,7 @@ export function AuthPage({ onClose }) {
   const [success, setSuccess] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
-  // Allow Escape key to dismiss auth overlay
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") onClose();

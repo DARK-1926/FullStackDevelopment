@@ -1,15 +1,15 @@
-/**
- * Client service for real-time GeeksforGeeks profile data retrieval.
- */
+
+
+
 
 const API_BASE = import.meta.env.VITE_API_URL || "";
 
-/**
- * Fetches real-time GeeksforGeeks stats for a user handle.
- * @param {string} handle - GeeksforGeeks handle (e.g. "alex_gfg")
- * @param {Object} options - Options object
- * @param {boolean} [options.force=false] - Whether to bypass cache on server
- */
+
+
+
+
+
+
 export async function fetchLiveGfgStats(handle, options = {}) {
   const { force = false } = options;
 

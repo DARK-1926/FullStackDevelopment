@@ -13,7 +13,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-// Middleware: allow all caller origins dynamically with credentials
+
 app.use(cors({
   origin: true,
   credentials: true,
@@ -23,22 +23,22 @@ app.use(cors({
 app.options("*", cors());
 app.use(express.json({ limit: "256kb" }));
 
-// Ensure DB connection is initialized on API requests
+
 app.use(async (req, res, next) => {
   if (req.path.startsWith("/api")) {
     try {
       await connectDB();
-    } catch (_err) {
-      // Proceed gracefully to fallback store
+    } catch (error) {
+      console.warn("MongoDB is unavailable; continuing with the fallback store:", error);
     }
   }
   next();
 });
 
-// Mount all routes
+
 app.use(routes);
 
-// In production or when client build exists, serve static assets
+
 const distPath = path.resolve(__dirname, "../../dist");
 const frontendDistPath = path.resolve(__dirname, "../../frontend/dist");
 const clientBuildPath = fs.existsSync(distPath)
@@ -53,7 +53,7 @@ if (clientBuildPath) {
   });
 }
 
-// Global error handler
+
 app.use(errorHandler);
 
 export default app;

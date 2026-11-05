@@ -1,15 +1,15 @@
-/**
- * Client service for real-time GitHub profile data retrieval.
- */
+
+
+
 
 const API_BASE = import.meta.env.VITE_API_URL || "";
 
-/**
- * Fetches real-time GitHub stats for a user handle.
- * @param {string} handle - GitHub username (e.g. "alexshah-dev")
- * @param {Object} options - Options object
- * @param {boolean} [options.force=false] - Whether to bypass server cache
- */
+
+
+
+
+
+
 export async function fetchLiveGitHubStats(handle, options = {}) {
   const { force = false } = options;
 

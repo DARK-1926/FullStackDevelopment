@@ -19,7 +19,6 @@ function AppContent() {
   const {
     activePage,
     setActivePage,
-    applications,
     closeAuthPage,
   } = useAppContext();
 
@@ -37,19 +36,14 @@ function AppContent() {
   const navigation = [
     { id: "overview", label: "Overview", icon: LayoutDashboard },
     { id: "calendar", label: "Contests & Events", icon: CalendarDays },
-    {
-      id: "career",
-      label: "Career & Pipeline",
-      icon: BriefcaseBusiness,
-      badge: applications.length > 0 ? applications.length : undefined,
-    },
+    { id: "career", label: "Career & Pipeline", icon: BriefcaseBusiness },
   ];
 
   if (activePage === "auth") {
     return <AuthPage onClose={closeAuthPage} />;
   }
 
-  // Standalone 404 Page (no header or shell navigation)
+
   const knownPages = ["overview", "career", "applications", "calendar", "profile"];
   if (!knownPages.includes(activePage)) {
     return <NotFoundPage />;

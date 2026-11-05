@@ -6,8 +6,8 @@
   --font-heading: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --font-editorial: "DM Serif Display", Georgia, "Times New Roman", serif;
-  
-  /* Modern Dark Obsidian & Slate Surfaces */
+
+
   --bg-page: #0a0e17;
   --bg-surface: #0f1523;
   --bg-card: #131b2e;
@@ -15,20 +15,20 @@
   --bg-card-subtle: rgba(255, 255, 255, 0.03);
   --bg-sidebar: #080b12;
   --bg-sidebar-hover: rgba(99, 102, 241, 0.09);
-  
-  /* High-Energy Accents */
+
+
   --color-primary: #6366f1;
   --color-primary-hover: #4f46e5;
   --color-primary-glow: rgba(99, 102, 241, 0.35);
   --gradient-accent: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
   --gradient-button: linear-gradient(135deg, #6366f1 0%, #7c3aed 100%);
   --gradient-card-top: linear-gradient(180deg, rgba(99, 102, 241, 0.08) 0%, transparent 100%);
-  
-  /* Functional Colors */
+
+
   --color-success: #10b981;
   --color-success-bg: rgba(16, 185, 129, 0.12);
   --color-success-border: rgba(16, 185, 129, 0.3);
-  
+
   --color-cyan: #06b6d4;
   --color-cyan-bg: rgba(6, 182, 212, 0.12);
   --color-cyan-border: rgba(6, 182, 212, 0.3);
@@ -41,18 +41,18 @@
   --color-danger-bg: rgba(239, 68, 68, 0.12);
   --color-danger-border: rgba(239, 68, 68, 0.3);
 
-  /* Typography Colors */
+
   --color-text-title: #f8fafc;
   --color-text-main: #cbd5e1;
   --color-text-muted: #8193ac;
   --color-text-subtle: #576882;
-  
-  /* Borders and Dividers */
+
+
   --color-border: rgba(255, 255, 255, 0.08);
   --color-border-subtle: rgba(255, 255, 255, 0.04);
   --color-border-active: rgba(99, 102, 241, 0.4);
 
-  /* Geometry & Shadows */
+
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
@@ -79,14 +79,14 @@ body {
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  background-image: 
+  background-image:
     radial-gradient(at 10% 10%, rgba(99, 102, 241, 0.07) 0px, transparent 50%),
     radial-gradient(at 90% 90%, rgba(139, 92, 246, 0.05) 0px, transparent 50%);
   background-attachment: fixed;
   min-height: 100vh;
 }
 
-/* App Shell Layout */
+
 .app-shell {
   display: flex;
   min-height: 100vh;
@@ -390,7 +390,7 @@ nav {
   margin: 0 auto;
 }
 
-/* Page Heading */
+
 .page-heading {
   display: flex;
   align-items: flex-end;
@@ -423,7 +423,7 @@ nav {
   line-height: 1.5;
 }
 
-/* Common Buttons */
+
 .button {
   border: 0;
   border-radius: var(--radius-md);
@@ -517,7 +517,7 @@ nav {
   text-decoration: underline;
 }
 
-/* Stats Summary Grid */
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -597,7 +597,7 @@ nav {
   margin-top: 6px;
 }
 
-/* Streak Risk Alert Banner */
+
 .streak-alert-banner {
   background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(239, 68, 68, 0.08) 100%);
   border: 1px solid var(--color-warning-border);
@@ -627,7 +627,7 @@ nav {
   color: #cbd5e1;
 }
 
-/* Panels and Content Grid */
+
 .content-grid {
   display: grid;
   grid-template-columns: 1.6fr 1fr;
@@ -653,7 +653,7 @@ nav {
   font-weight: 700;
 }
 
-/* Focus Panel */
+
 .focus-panel {
   background: linear-gradient(145deg, #12192c 0%, #171d33 100%);
   border-color: rgba(99, 102, 241, 0.25);
@@ -733,7 +733,7 @@ nav {
   margin-top: 6px;
 }
 
-/* Opportunities List & Rows */
+
 .opportunity-list {
   display: flex;
   flex-direction: column;
@@ -798,7 +798,7 @@ nav {
   white-space: nowrap;
 }
 
-/* Tabs */
+
 .tab-bar {
   display: flex;
   gap: 8px;
@@ -835,7 +835,7 @@ nav {
   box-shadow: 0 0 12px rgba(99, 102, 241, 0.15);
 }
 
-/* Search and Filters */
+
 .search-container {
   display: flex;
   gap: 10px;
@@ -908,7 +908,7 @@ nav {
   box-shadow: 0 0 0 2px var(--color-primary-glow);
 }
 
-/* Opportunity Cards Grid */
+
 .opportunity-cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
@@ -1074,7 +1074,7 @@ nav {
   border-color: rgba(56, 189, 248, 0.25);
 }
 
-/* Modals */
+
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -1145,7 +1145,7 @@ nav {
   background: rgba(255, 255, 255, 0.08);
 }
 
-/* Auth Modal specifics */
+
 .auth-tab-bar {
   display: flex;
   border-bottom: 1px solid var(--color-border);
@@ -1237,7 +1237,7 @@ nav {
   color: #ffffff;
 }
 
-/* Applications Kanban Tracker */
+
 .tracker-board {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -1312,7 +1312,7 @@ nav {
   margin-top: 4px;
 }
 
-/* Forms and Inputs */
+
 .form-group {
   display: flex;
   flex-direction: column;
@@ -1352,7 +1352,7 @@ nav {
   min-height: 85px;
 }
 
-/* Platform Stats Grid (Streak module) */
+
 .platform-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1421,7 +1421,7 @@ nav {
   box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
 }
 
-/* AI Match & Score meters */
+
 .match-meter-container {
   display: flex;
   align-items: center;
@@ -1446,7 +1446,7 @@ nav {
   box-shadow: 0 0 18px rgba(99, 102, 241, 0.5);
 }
 
-/* Source Attribution Banner */
+
 .source-attribution {
   font-size: 11.5px;
   color: var(--color-text-muted);
@@ -1459,7 +1459,7 @@ nav {
   border: 1px solid var(--color-border-subtle);
 }
 
-/* OpportunityOS redesign: an editorial workspace in evergreen, parchment and citron. */
+
 :root {
   --bg-page: #f3f0e7;
   --bg-surface: #fffdf7;
@@ -1573,7 +1573,7 @@ body { background: var(--bg-page); color: var(--color-text-main); }
 .page-heading { margin-bottom: 30px; }
 .nav-item:focus-visible, .button:focus-visible, button:focus-visible { outline: 3px solid rgba(169, 216, 71, 0.75); outline-offset: 2px; }
 
-/* Dashboard composition */
+
 .dashboard-page { padding-top: 32px; }
 .dashboard-greeting { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 28px; }
 .dashboard-greeting .eyebrow { margin-bottom: 9px; }
@@ -1629,7 +1629,7 @@ body { background: var(--bg-page); color: var(--color-text-main); }
 .plan-note { display: flex; justify-content: space-between; gap: 10px; margin: 20px 0 0; padding-top: 15px; border-top: 1px solid #d9d7c9; color: #74796d; font-size: 10px; }
 .plan-note strong { color: #8b6845; }
 
-/* Clean up component surfaces across the rest of the app */
+
 .opportunity-card { border-radius: 14px; padding: 20px; }
 .opportunity-card h2 { font-size: 15px; }
 .tag { color: #526a3d; background: #edf1e2; border-color: #dce5c8; }
@@ -1649,7 +1649,7 @@ body { background: var(--bg-page); color: var(--color-text-main); }
 .modal-dialog { border-color: #e6e2d7; border-radius: 16px; }
 .mobile-brand { color: #202923; }
 
-/* 28-Day Consistency Heatmap */
+
 .heatmap-container { margin-top: 18px; }
 .heatmap-meta { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--color-text-muted); margin-bottom: 12px; }
 .heatmap-meta strong { color: var(--color-text-title); }
@@ -1666,7 +1666,7 @@ body { background: var(--bg-page); color: var(--color-text-main); }
 .heatmap-legend { display: flex; align-items: center; justify-content: flex-end; gap: 6px; margin-top: 14px; font-size: 11px; color: var(--color-text-muted); }
 .legend-swatch { width: 14px; height: 14px; border-radius: 3px; }
 
-/* DevRhythm analytics theme */
+
 :root {
   --bg-page: #090b0d;
   --bg-surface: #0d1013;
@@ -1842,7 +1842,7 @@ body {
 .plan-note { color: #82909b; border-top-color: #20272d; }
 .plan-note strong { color: #a4d3e1; }
 
-/* Shared surfaces follow the same low-contrast dashboard system. */
+
 .stat-card, .panel, .opportunity-card, .platform-card, .tracker-card, .tracker-column,
 .focus-panel, .milestone-card, .search-bar, .form-input, .form-select, .form-textarea,
 .filter-select, .modal-dialog {
@@ -1907,7 +1907,7 @@ body {
   .section-title-row h2 { font-size: 20px; }
 }
 
-/* Streak Milestones - Dark Translucent High-Contrast Aesthetic */
+
 .milestones-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -1999,7 +1999,7 @@ body {
   transition: width 0.3s ease;
 }
 
-/* Spin animation */
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
@@ -2010,7 +2010,7 @@ body {
   animation: spin 1s linear infinite;
 }
 
-/* Animations */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -2022,7 +2022,7 @@ body {
   }
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 992px) {
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -2136,7 +2136,7 @@ body {
   .section-title-row h2 { font-size: 20px; }
 }
 
-/* Final layout overrides after legacy responsive rules. */
+
 .dashboard-hero::after { z-index: 1; }
 .hero-copy, .hero-orbit { z-index: 2; }
 
@@ -2154,7 +2154,7 @@ body {
   .nav-item { padding: 0 8px; font-size: 11px; }
 }
 
-/* Integrated streak and practice homepage. */
+
 .app-background { opacity: 0.9; }
 .home-dashboard { padding-top: 28px; }
 .home-streak-glow { width: 100%; margin-bottom: 30px; }
@@ -2316,7 +2316,7 @@ body {
   .home-platform-grid > :last-child { width: 100%; }
 }
 
-/* Keep the skyline and its full animation in the initial desktop view. */
+
 .home-dashboard { padding-top: 14px; }
 .home-streak-section {
   min-height: 0;
@@ -2378,7 +2378,7 @@ body {
   .home-streak-best { width: 100%; }
 }
 
-/* React Bits PillNav application header. */
+
 .site-nav-shell {
   position: sticky;
   top: 0;
@@ -2446,7 +2446,7 @@ body {
   .career-page-wrapper .career-switcher .tab-btn { flex: 1 1 100%; justify-content: flex-start; }
 }
 
-/* Clearer dashboard type and a balanced current/longest streak summary. */
+
 body {
   font-family: var(--font-family);
   font-size: 14px;
@@ -2533,9 +2533,9 @@ button, input, select, textarea { font: inherit; }
   .home-streak-stat strong { font-size: 38px; }
 }
 
-/* ==========================================================================
-   CYBER TELEMETRY & PLATFORM CONSTELLATION CONSOLE (Image 2 Inspiration)
-   ========================================================================== */
+
+
+
 
 .cyber-console {
   display: flex;
@@ -2557,7 +2557,7 @@ button, input, select, textarea { font: inherit; }
   }
 }
 
-/* Radar Constellation Canvas Card */
+
 .cyber-radar-card {
   background: #090d11;
   background-image: radial-gradient(circle, rgba(56, 189, 248, 0.1) 1px, transparent 1px);
@@ -2669,7 +2669,7 @@ button, input, select, textarea { font: inherit; }
   transform: scale(1.08);
 }
 
-/* Platform Inspector Under Radar */
+
 .cyber-inspector {
   margin-top: 18px;
   background: rgba(13, 17, 20, 0.85);
@@ -2728,7 +2728,7 @@ button, input, select, textarea { font: inherit; }
   margin-top: 2px;
 }
 
-/* Telemetry Sidebar (Right Column) */
+
 .cyber-sidebar {
   display: flex;
   flex-direction: column;
@@ -2810,7 +2810,7 @@ button, input, select, textarea { font: inherit; }
   gap: 4px;
 }
 
-/* Multi-Segment Horizontal Progress Bars */
+
 .cyber-segmented-bar {
   display: flex;
   height: 8px;
@@ -2892,9 +2892,9 @@ button, input, select, textarea { font: inherit; }
   font-variant-numeric: tabular-nums;
 }
 
-/* ==========================================================================
-   IMAGE 2 CYBER VISUAL REPRODUCTION - CONSTELLATION & TELEMETRY
-   ========================================================================== */
+
+
+
 
 .visual-root {
   background: transparent !important;
@@ -2957,7 +2957,7 @@ button, input, select, textarea { font: inherit; }
   gap: 14px;
 }
 
-/* Centered contribution explorer: platform branches stay collapsed until a plus is selected. */
+
 .visual-root {
   display: block;
   min-height: auto;
@@ -3285,7 +3285,7 @@ main.page-content:has(.analytics-explorer.has-analytics-drawer) > .milestones-se
   cursor: pointer;
 }
 
-/* Image 2 Top Telemetry Card */
+
 .visual-header-card {
   background: rgba(13, 17, 23, 0.65);
   backdrop-filter: blur(12px);
@@ -3325,7 +3325,7 @@ main.page-content:has(.analytics-explorer.has-analytics-drawer) > .milestones-se
   margin-top: 2px;
 }
 
-/* 6-Tile Telemetry Grid */
+
 .visual-grid-6 {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -3380,7 +3380,7 @@ main.page-content:has(.analytics-explorer.has-analytics-drawer) > .milestones-se
   color: #94a3b8;
 }
 
-/* Severity & Category Breakdown Cards */
+
 .visual-breakdown-title {
   font-size: 12px;
   font-weight: 700;
@@ -3445,7 +3445,7 @@ main.page-content:has(.analytics-explorer.has-analytics-drawer) > .milestones-se
   text-overflow: ellipsis;
 }
 
-/* Expanded Platform Details Panel (Inline Expansion) */
+
 .visual-expand-panel {
   margin-top: 14px;
   background: rgba(13, 17, 23, 0.75);

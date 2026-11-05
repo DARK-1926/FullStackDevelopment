@@ -1,11 +1,11 @@
-/**
- * Real-time LeetCode profile information retrieval service.
- * Fetches verified public statistics via LeetCode's public GraphQL API
- * with resilient in-memory caching and input sanitization.
- */
+
+
+
+
+
 
 const cache = new Map();
-const CACHE_TTL_MS = 3 * 60 * 1000; // 3-minute in-memory cache to prevent rate-limiting
+const CACHE_TTL_MS = 3 * 60 * 1000;
 
 const BROWSER_HEADERS = {
   "Content-Type": "application/json",
@@ -14,10 +14,10 @@ const BROWSER_HEADERS = {
   Referer: "https://leetcode.com",
 };
 
-/**
- * Validates a LeetCode username format.
- * LeetCode handles are 2-40 characters consisting of letters, digits, underscores, and hyphens.
- */
+
+
+
+
 export function isValidHandle(handle) {
   if (!handle || typeof handle !== "string") return false;
   const trimmed = handle.trim();
@@ -57,10 +57,10 @@ const LEETCODE_PROFILE_QUERY = `
   }
 `;
 
-/**
- * Fetches and parses live LeetCode statistics for a given username.
- * Accepts options: { forceRefresh?: boolean }
- */
+
+
+
+
 export async function getLeetCodeProfile(handle, options = {}) {
   const { forceRefresh = false } = options;
 
@@ -75,7 +75,7 @@ export async function getLeetCodeProfile(handle, options = {}) {
   const cacheKey = normalizedHandle.toLowerCase();
   const now = Date.now();
 
-  // Return cached entry if fresh
+
   if (!forceRefresh && cache.has(cacheKey)) {
     const cached = cache.get(cacheKey);
     if (now - cached.timestamp < CACHE_TTL_MS) {
@@ -140,13 +140,13 @@ export async function getLeetCodeProfile(handle, options = {}) {
       }
     }
 
-    // Contest stats if available
+
     const contest = json.data?.userContestRanking;
     const contestRating = contest?.rating ? Math.round(contest.rating) : null;
     const contestRank = contest?.globalRanking || null;
     const contestBadge = contest?.badge?.name || null;
 
-    // Recent Accepted Submissions for real-time practice feed
+
     const rawSubmissions = json.data?.recentSubmissionList || [];
     const recentSubmissions = rawSubmissions
       .filter((s) => s.statusDisplay === "Accepted")
@@ -157,7 +157,7 @@ export async function getLeetCodeProfile(handle, options = {}) {
           date: dateStr,
           platform: "LeetCode",
           problemsSolved: 1,
-          difficulty: "Medium", // default level when not provided by recent submission list
+          difficulty: "Medium",
           category: s.lang ? `Solved in ${s.lang}` : "Algorithms & DSA",
           notes: `Solved ${s.title || "LeetCode problem"}`,
         };
@@ -180,7 +180,7 @@ export async function getLeetCodeProfile(handle, options = {}) {
       syncedAt: new Date().toISOString(),
     };
 
-    // Store in cache
+
     cache.set(cacheKey, { timestamp: now, data });
 
     return data;

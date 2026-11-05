@@ -6,9 +6,9 @@ import { User } from "../models/User.js";
 import { fallbackStore } from "../store/fallbackStore.js";
 import { sanitizeUser } from "../utils/sanitize.js";
 
-/**
- * POST /api/auth/register
- */
+
+
+
 export async function register(req, res) {
   try {
     const { name, email, password, university, degree, gradYear } = req.body || {};
@@ -23,7 +23,7 @@ export async function register(req, res) {
 
     const normalizedEmail = String(email).trim().toLowerCase();
 
-    // Check if user already exists
+
     if (getMongoStatus()) {
       try {
         const existing = await User.findOne({ email: normalizedEmail });
@@ -59,7 +59,7 @@ export async function register(req, res) {
       }
     }
 
-    // Fallback local store
+
     const existing = fallbackStore.findUserByEmail(normalizedEmail);
     if (existing) {
       return res.status(409).json({ error: "An account with this email already exists." });
@@ -91,9 +91,9 @@ export async function register(req, res) {
   }
 }
 
-/**
- * POST /api/auth/login
- */
+
+
+
 export async function login(req, res) {
   try {
     const { email, password } = req.body || {};
@@ -116,7 +116,7 @@ export async function login(req, res) {
       user = fallbackStore.findUserByEmail(normalizedEmail);
     }
 
-    // If not found in MongoDB, check fallback store for seeded accounts
+
     if (!user) {
       user = fallbackStore.findUserByEmail(normalizedEmail);
     }
@@ -146,9 +146,9 @@ export async function login(req, res) {
   }
 }
 
-/**
- * GET /api/auth/me
- */
+
+
+
 export async function me(req, res) {
   try {
     let user = null;
@@ -173,9 +173,9 @@ export async function me(req, res) {
   }
 }
 
-/**
- * POST /api/auth/logout
- */
+
+
+
 export function logout(_req, res) {
   res.json({ message: "Logged out successfully." });
 }

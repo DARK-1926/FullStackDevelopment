@@ -1,7 +1,7 @@
-/**
- * Pure client-side explainable algorithm for matching student profile with job skills.
- * Guarantees no hallucination: strictly uses known student skills and JD requirements.
- */
+
+
+
+
 export function analyzeResumeJDMatch(studentSkills, jobSkills, jobTitle) {
   const normalizedStudent = studentSkills.map((s) => s.trim().toLowerCase());
   const matchedSkills = [];
@@ -54,9 +54,9 @@ export function analyzeResumeJDMatch(studentSkills, jobSkills, jobTitle) {
   };
 }
 
-/**
- * Generates tailored outreach cold emails for recruiters, professors, or alumni.
- */
+
+
+
 export function generateOutreachDraft(params) {
   const { studentName, university, degree, company, role, recipientType, tone, keySkills } = params;
   const skillsList = keySkills.slice(0, 3).join(", ");
@@ -127,7 +127,7 @@ Thanks a lot for your time!
 Best regards,
 ${studentName}`;
   } else {
-    // Engineering Manager
+
     subject = `Interest in ${role} team at ${company} - ${studentName}`;
     body = `Hi,
 
@@ -146,10 +146,10 @@ ${studentName}`;
   return { subject, body };
 }
 
-/**
- * Natural language search parser.
- * Converts natural queries like "paid ML internships for sophomore" into structured filters.
- */
+
+
+
+
 export function parseNaturalLanguageQuery(query) {
   const q = query.toLowerCase();
 

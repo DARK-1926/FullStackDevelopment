@@ -13,8 +13,8 @@ const WINNING_COMBOS = [
   [2, 4, 6],
 ];
 
-// Initial board: AI owns center cell (index 4) with the DevRhythm music/code symbol "</>"
-// so the opponent has the unbeatable tactical advantage from the start!
+
+
 const INITIAL_BOARD = [
   null, null, null,
   null, "O", null,
@@ -33,7 +33,7 @@ function checkWinner(board) {
   return null;
 }
 
-// Unbeatable Minimax algorithm for classic Tic-Tac-Toe
+
 function minimax(board, depth, isMaximizing) {
   const result = checkWinner(board);
   if (result === "O") return 10 - depth;
@@ -96,7 +96,7 @@ export function NotFoundPage() {
   const handleCellClick = (index) => {
     if (board[index] || winner || isAiThinking) return;
 
-    // Player (X) move
+
     const newBoard = [...board];
     newBoard[index] = "X";
 
@@ -113,7 +113,7 @@ export function NotFoundPage() {
     setBoard(newBoard);
     setIsAiThinking(true);
 
-    // AI (O) turn with slight natural delay
+
     setTimeout(() => {
       setBoard((currentBoard) => {
         const aiIndex = getBestMove(currentBoard);
@@ -162,7 +162,7 @@ export function NotFoundPage() {
         </div>
       </div>
 
-      {/* Gamified 4 [Tic-Tac-Toe] 4 Board */}
+
       <div className="not-found-stage">
         <div className="not-found-numeral" aria-hidden="true">
           4
@@ -194,7 +194,7 @@ export function NotFoundPage() {
         </div>
       </div>
 
-      {/* Game status announcement */}
+
       <div className={`ttt-status-text ${winner ? "winner" : ""}`}>
         {winner === "X" && "Impressive. You won this round!"}
         {winner === "O" && "Told you so. Better luck next game."}
@@ -202,7 +202,7 @@ export function NotFoundPage() {
         {!winner && (isAiThinking ? "Opponent thinking..." : "Your turn (You: ✕)")}
       </div>
 
-      {/* Action Links */}
+
       <div className="not-found-actions">
         <button className="bracket-btn" onClick={handleResetGame} type="button">
           [ LOSE AGAIN ]

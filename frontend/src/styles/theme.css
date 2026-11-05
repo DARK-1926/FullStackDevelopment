@@ -203,7 +203,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
   .site-nav-shell { background: rgba(255, 255, 255, .96); }
 }
 
-/* Layout styles for the current dashboard and replacement navigation markup. */
+
 .site-nav-shell { flex-wrap: nowrap; }
 .site-nav-main { display: flex !important; flex-direction: row !important; align-items: center; justify-content: center; gap: 3px; flex-wrap: nowrap !important; overflow-x: auto; scrollbar-width: none; }
 .site-nav-main::-webkit-scrollbar { display: none; }
@@ -370,7 +370,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
 .applications-board .application-card.is-dragging { opacity: .45; transform: scale(.98); }
 .applications-board .application-column.is-drop-ready { outline: 2px dashed #92928d; outline-offset: 2px; }
 
-/* Bring the remaining legacy dark-page rules back onto the shared paper theme. */
+
 .site-nav-shell { min-height: 76px; padding: 0 clamp(16px, 3vw, 42px); }
 .site-nav-auth .nav-auth-flow {
   min-width: 164px; min-height: 42px; padding: 0 14px; border: 1px solid #171717 !important; border-radius: 9px !important;
@@ -492,6 +492,17 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
 .calendar-page-container .cell-event-chip.chip-deadline { color: #6b5630 !important; background: #f8f2e6 !important; border-color: #e9ddc2 !important; }
 .calendar-page-container .cell-event-chip.chip-default { color: #3e6052 !important; background: #edf4f0 !important; border-color: #d5e4db !important; }
 .calendar-page-container .calendar-page-container { background: transparent; }
+
+@media (min-width: 1100px) and (min-height: 700px) {
+  .page-content.calendar-page-container {
+    padding: 12px 32px 12px;
+    gap: 12px;
+  }
+
+  .calendar-page-container .calendar-header-toolbar {
+    padding: 0 0 10px;
+  }
+}
 
 .visual-expand-panel { display: flex; flex-direction: column; gap: 16px; padding: 22px; background: #fff !important; border: 1px solid #dededb !important; border-top: 3px solid var(--selected-platform-color, #171717) !important; border-radius: 15px; box-shadow: 0 12px 30px rgba(0,0,0,.07) !important; }
 .visual-expand-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid #e8e8e5; }

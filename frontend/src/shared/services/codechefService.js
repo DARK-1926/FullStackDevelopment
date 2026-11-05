@@ -1,15 +1,15 @@
-/**
- * Client service for real-time CodeChef profile data retrieval.
- */
+
+
+
 
 const API_BASE = import.meta.env.VITE_API_URL || "";
 
-/**
- * Fetches real-time CodeChef stats for a user handle.
- * @param {string} handle - CodeChef handle (e.g. "alex_chef")
- * @param {Object} options - Options object
- * @param {boolean} [options.force=false] - Whether to bypass cache on server
- */
+
+
+
+
+
+
 export async function fetchLiveCodeChefStats(handle, options = {}) {
   const { force = false } = options;
 
@@ -48,7 +48,7 @@ export async function fetchLiveCodeChefStats(handle, options = {}) {
       };
     }
 
-    // Graceful offline fallback
+
     return {
       success: false,
       error: `Network request failed: ${err.message}. Ensure backend is running.`,

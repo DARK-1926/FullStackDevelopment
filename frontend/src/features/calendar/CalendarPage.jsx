@@ -38,7 +38,7 @@ export function CalendarPage() {
     isContestsLoading,
   } = useAppContext();
 
-  // Prefer live context events (from /api/contests). If empty, use initial seed events
+
   const calendarEvents = useMemo(() => {
     if (contextEvents && contextEvents.length > 0) {
       return contextEvents;
@@ -49,12 +49,12 @@ export function CalendarPage() {
   const today = useMemo(() => new Date(), []);
   const todayDateKey = useMemo(() => normalizeDateKey(today), [today]);
 
-  // Navigation state defaults to current real date
+
   const [currentYear, setCurrentYear] = useState(() => today.getFullYear());
   const [currentMonth, setCurrentMonth] = useState(() => today.getMonth());
   const [selectedDate, setSelectedDate] = useState(() => todayDateKey);
 
-  // Next upcoming event finder for fast navigation
+
   const nextUpcomingEvent = useMemo(() => {
     const todayStr = normalizeDateKey(new Date());
     return (
@@ -64,12 +64,12 @@ export function CalendarPage() {
     );
   }, [calendarEvents]);
 
-  // Filters
+
   const [categoryFilter, setCategoryFilter] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
-  // Close modal on Escape key for keyboard/screen reader users
+
   useEffect(() => {
     if (!isAddModalOpen) return;
     const handleKeyDown = (e) => {
@@ -79,7 +79,7 @@ export function CalendarPage() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isAddModalOpen]);
 
-  // Add event form state
+
   const [modalTitle, setModalTitle] = useState("");
   const [modalOrganizer, setModalOrganizer] = useState("");
   const [modalType, setModalType] = useState("Contest");
@@ -90,7 +90,7 @@ export function CalendarPage() {
 
   const agendaRef = useRef(null);
 
-  // Map events to dateKey for O(1) day lookups
+
   const eventsByDate = useMemo(() => {
     const map = new Map();
     for (const evt of calendarEvents) {
@@ -118,23 +118,23 @@ export function CalendarPage() {
     return map;
   }, [calendarEvents, categoryFilter, searchQuery]);
 
-  // Compute 7-column calendar cells for current view
+
   const calendarCells = useMemo(() => {
     return generateMonthGrid(currentYear, currentMonth);
   }, [currentYear, currentMonth]);
 
-  // Selected date's events
+
   const selectedDateEvents = useMemo(() => {
     return eventsByDate.get(selectedDate) || [];
   }, [eventsByDate, selectedDate]);
 
-  // Accordion expansion state
+
   const [userExpandedId, setUserExpandedId] = useState(null);
   const expandedEventId = userExpandedId !== null
     ? userExpandedId
     : (selectedDateEvents[0]?.id || null);
 
-  // Month navigation handlers
+
   const handlePrevMonth = () => {
     if (currentMonth === 0) {
       setCurrentMonth(11);
@@ -206,10 +206,9 @@ export function CalendarPage() {
 
   return (
     <main className="page-content calendar-page-container">
-      {/* SECTION A: PAGE HEADER & CONTROLS */}
+
       <div className="calendar-header-toolbar">
         <div>
-          <p className="eyebrow">Contests &amp; Events</p>
           <h1 style={{ margin: "2px 0 6px 0", fontSize: 24, fontWeight: 800, color: "var(--color-text-title)" }}>
             Contests &amp; Events
           </h1>
@@ -219,7 +218,7 @@ export function CalendarPage() {
         </div>
 
         <div className="calendar-filters-row">
-          {/* Search Box */}
+
           <div style={{ position: "relative" }}>
             <Search
               size={14}
@@ -268,7 +267,7 @@ export function CalendarPage() {
             )}
           </div>
 
-          {/* Category Dropdown */}
+
           <select
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
@@ -290,7 +289,7 @@ export function CalendarPage() {
             <option value="Deadline">Application Deadlines</option>
           </select>
 
-          {/* Refresh Live Contests */}
+
           <button
             className="button button-secondary"
             onClick={() => refreshLiveContests(true)}
@@ -303,7 +302,7 @@ export function CalendarPage() {
             {isContestsLoading ? "Syncing..." : "Sync Live Contests"}
           </button>
 
-          {/* Add Custom Event */}
+
           <button
             className="button button-primary"
             onClick={() => setIsAddModalOpen(true)}
@@ -315,11 +314,11 @@ export function CalendarPage() {
         </div>
       </div>
 
-      {/* SECTION B & C: 2-COLUMN SPLIT (CALENDAR ON LEFT, AGENDA ON RIGHT) */}
+
       <div className="calendar-main-layout">
-        {/* LEFT COLUMN: COMPACT MONTHLY CALENDAR (HALF VERTICALLY / LEFT-ALIGNED) */}
+
         <section className="calendar-glass-card" aria-label="Monthly Calendar Overview">
-          {/* Navigation Bar */}
+
           <div className="calendar-nav-bar">
             <div className="calendar-current-month">
               <CalendarDays size={18} color="#222222" />
@@ -354,7 +353,7 @@ export function CalendarPage() {
             </div>
           </div>
 
-          {/* 7-Column Weekday Header */}
+
           <div className="calendar-grid-header">
             {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((dayName) => (
               <div key={dayName} className="calendar-weekday-label">
@@ -363,7 +362,7 @@ export function CalendarPage() {
             ))}
           </div>
 
-          {/* 7-Column Dates Grid with In-Cell Pastel Event Chips */}
+
           <div className="calendar-grid-days" role="grid">
             {calendarCells.map((cell) => {
               const dayEvents = eventsByDate.get(cell.dateKey) || [];
@@ -392,7 +391,7 @@ export function CalendarPage() {
                 >
                   <span className="calendar-date-num">{cell.dayNumber}</span>
 
-                  {/* Event Chips Rendered Inside the Cell (Image 3 Style) */}
+
                   {dayEvents.length > 0 && (
                     <div className="cell-event-chips">
                       {dayEvents.slice(0, 2).map((evt) => {
@@ -428,7 +427,7 @@ export function CalendarPage() {
             })}
           </div>
 
-          {/* Category Legend */}
+
           <div className="calendar-legend-bar">
             <div className="calendar-legend-items">
               <div className="calendar-legend-item">
@@ -452,7 +451,7 @@ export function CalendarPage() {
           </div>
         </section>
 
-        {/* RIGHT COLUMN: SELECTED-DATE EVENT AGENDA (EXPANDABLE ACCORDION) */}
+
         <section ref={agendaRef} className="agenda-section" aria-label="Selected Date Agenda">
           <div className="agenda-header-banner">
             <div>
@@ -652,7 +651,7 @@ export function CalendarPage() {
         </section>
       </div>
 
-      {/* ADD CUSTOM EVENT MODAL */}
+
       {isAddModalOpen && (
         <div
           className="modal-overlay"

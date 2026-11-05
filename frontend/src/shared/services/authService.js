@@ -1,7 +1,7 @@
-/**
- * Authentication client for OpportunityOS
- * Communicates with the Express + MongoDB backend (or fallback store)
- */
+
+
+
+
 
 export const TOKEN_STORAGE_KEY = "opportunity_os_auth_token";
 export const USER_STORAGE_KEY = "opportunity_os_auth_user";
@@ -91,7 +91,7 @@ export async function checkSession() {
     saveSession(token, data.user);
     return data.user;
   } catch {
-    // If backend is momentarily unreachable, use stored user
+
     return getStoredUser();
   }
 }
@@ -104,8 +104,8 @@ export async function logoutUser() {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
     });
-  } catch {
-    // ignore
+  } catch (error) {
+    console.warn("The server logout request failed after the local session was cleared:", error);
   }
 }
 

@@ -23,12 +23,12 @@ export function AppShell({ navigation, activePage, onNavigate, children }) {
 
   return (
     <div className="app-shell">
-      {/* Skip to Main Content Link for screen readers and keyboard users */}
+
       <a href="#main-content" className="skip-to-content">
         Skip to main content
       </a>
 
-      {/* Screen Reader Live Region for Page Transitions */}
+
       <div className="sr-only" role="status" aria-live="polite" aria-atomic="true">
         {`Current page: ${activePage}`}
       </div>

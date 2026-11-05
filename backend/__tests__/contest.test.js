@@ -17,7 +17,7 @@ describe("Contest Service", () => {
   it("handles getAllRealContests gracefully and returns formatted array", async () => {
     const all = await getAllRealContests();
     expect(Array.isArray(all)).toBe(true);
-    // At least GfG contests will be populated even if network is restricted
+
     expect(all.length).toBeGreaterThan(0);
     const item = all[0];
     expect(item).toHaveProperty("id");

@@ -3,9 +3,9 @@ import { User } from "../models/User.js";
 import { fallbackStore } from "../store/fallbackStore.js";
 import { sanitizeUser } from "../utils/sanitize.js";
 
-/**
- * PUT /api/user/profile
- */
+
+
+
 export async function updateProfile(req, res) {
   try {
     const body = req.body && typeof req.body === "object" && !Array.isArray(req.body)

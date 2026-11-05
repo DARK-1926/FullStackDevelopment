@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Resolve .env from the backend root (two levels up from config/)
+
 dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
 export const PORT = process.env.PORT || 5000;

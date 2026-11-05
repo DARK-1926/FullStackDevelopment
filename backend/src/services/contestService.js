@@ -1,16 +1,16 @@
-/**
- * Real-time Multi-Platform Contest Ingestion Service
- * Fetches real upcoming & live contests across:
- * - Codeforces (Official public REST API)
- * - LeetCode (Public GraphQL Gateway)
- * - CodeChef (Official internal JSON feed)
- * - GeeksforGeeks (Live scheduled weekly & job-a-thon events)
- *
- * Implements in-memory caching with graceful fallbacks so the frontend
- * always receives reliable schedules even during third-party rate limits.
- */
 
-const CACHE_TTL_MS = 10 * 60 * 1000; // 10 minutes cache
+
+
+
+
+
+
+
+
+
+
+
+const CACHE_TTL_MS = 10 * 60 * 1000;
 let cachedContests = null;
 let lastCacheTime = 0;
 
@@ -20,9 +20,9 @@ const BROWSER_HEADERS = {
   Accept: "application/json, text/plain, */*",
 };
 
-/**
- * Format a Date object to YYYY-MM-DD
- */
+
+
+
 function toDateKey(date) {
   const y = date.getFullYear();
   const m = String(date.getMonth() + 1).padStart(2, "0");
@@ -30,9 +30,9 @@ function toDateKey(date) {
   return `${y}-${m}-${d}`;
 }
 
-/**
- * Format time string in IST
- */
+
+
+
 function formatTimeIST(date, durationHours = null) {
   const timeStr = date.toLocaleTimeString("en-IN", {
     timeZone: "Asia/Kolkata",
@@ -43,9 +43,9 @@ function formatTimeIST(date, durationHours = null) {
   return durationHours ? `${timeStr} IST (${durationHours} hrs)` : `${timeStr} IST`;
 }
 
-/**
- * 1. Fetch real Codeforces contests from official API
- */
+
+
+
 export async function fetchCodeforcesContests() {
   try {
     const res = await fetch("https://codeforces.com/api/contest.list?gym=false", {
@@ -57,7 +57,7 @@ export async function fetchCodeforcesContests() {
     const json = await res.json();
     if (json.status !== "OK" || !Array.isArray(json.result)) return [];
 
-    // Filter upcoming (BEFORE) and live (CODING) contests
+
     const active = json.result.filter(
       (c) => c.phase === "BEFORE" || c.phase === "CODING",
     );
@@ -87,9 +87,9 @@ export async function fetchCodeforcesContests() {
   }
 }
 
-/**
- * 2. Fetch real LeetCode weekly & biweekly contests
- */
+
+
+
 export async function fetchLeetCodeContests() {
   try {
     const query = `
@@ -150,9 +150,9 @@ export async function fetchLeetCodeContests() {
   }
 }
 
-/**
- * 3. Fetch real CodeChef contests
- */
+
+
+
 export async function fetchCodeChefContests() {
   try {
     const res = await fetch(
@@ -197,19 +197,19 @@ export async function fetchCodeChefContests() {
   }
 }
 
-/**
- * 4. Generate next upcoming recurring GeeksforGeeks contests
- * (GfG Weekly Coding Contest every Sunday at 7:00 PM IST + Job-A-Thon every 21st)
- */
+
+
+
+
 export function getGeeksforGeeksContests() {
   const events = [];
   const now = new Date();
 
-  // Find next 3 Sundays for GfG Weekly
+
   for (let i = 0; i < 28; i++) {
     const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() + i, 19, 0, 0);
     if (d.getDay() === 0) {
-      // Sunday
+
       events.push({
         id: `gfg-weekly-${toDateKey(d)}`,
         title: `GFG Weekly Coding Contest`,
@@ -231,10 +231,10 @@ export function getGeeksforGeeksContests() {
   return events;
 }
 
-/**
- * Safely strips HTML tags without vulnerable single-pass regex replacement.
- * Prevents incomplete multi-character sanitization (e.g. CodeQL / security scanners).
- */
+
+
+
+
 function stripHtmlTags(input) {
   if (!input || typeof input !== "string") return "";
   let previous;
@@ -246,9 +246,9 @@ function stripHtmlTags(input) {
   return sanitized.trim();
 }
 
-/**
- * 5. Fetch real live Hackathons from Devpost
- */
+
+
+
 export async function fetchDevpostHackathons() {
   try {
     const res = await fetch("https://devpost.com/api/hackathons", {
@@ -261,15 +261,15 @@ export async function fetchDevpostHackathons() {
     const hackathons = Array.isArray(json.hackathons) ? json.hackathons : [];
 
     return hackathons.map((h) => {
-      // Safely strip HTML tags if present (e.g. $<span data-currency-value>67,500</span>)
+
       const rawPrize = stripHtmlTags(h.prize_amount);
       const themes = Array.isArray(h.themes) ? h.themes.map((t) => t.name) : ["Hackathon"];
       const location = h.displayed_location?.location || "Online";
 
-      // Parse end date or default to near-term date
+
       let eventDate = toDateKey(new Date());
       if (h.submission_period_dates) {
-        // e.g. "Oct 01 - Nov 12, 2026"
+
         const parts = h.submission_period_dates.split("-");
         const endDateStr = parts[parts.length - 1]?.trim();
         if (endDateStr) {
@@ -300,16 +300,16 @@ export async function fetchDevpostHackathons() {
   }
 }
 
-/**
- * Primary aggregator function with resilient in-memory caching
- */
+
+
+
 export async function getAllRealContests(options = { force: false }) {
   const now = Date.now();
   if (!options.force && cachedContests && now - lastCacheTime < CACHE_TTL_MS) {
     return cachedContests;
   }
 
-  // Fetch in parallel with error shielding
+
   const [cf, lc, cc, devpost] = await Promise.all([
     fetchCodeforcesContests().catch(() => []),
     fetchLeetCodeContests().catch(() => []),
@@ -321,7 +321,7 @@ export async function getAllRealContests(options = { force: false }) {
 
   const combined = [...cf, ...lc, ...cc, ...devpost, ...gfg];
 
-  // Sort by date ascending
+
   combined.sort((a, b) => (a.date > b.date ? 1 : -1));
 
   cachedContests = combined;

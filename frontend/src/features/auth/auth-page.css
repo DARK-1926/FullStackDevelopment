@@ -78,8 +78,8 @@
   .auth-back-button,.auth-mode-switch button,.auth-input-wrap,.auth-submit { transition:none; }
 }
 
-/* Warm white sign-in composition: oversized tactile typography and a quiet,
-   interactive ASCII globe behind the story column. */
+
+
 .auth-page {
   background: #f7f7f5;
   color: #171717;

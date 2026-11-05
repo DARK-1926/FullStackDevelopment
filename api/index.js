@@ -16,8 +16,8 @@ export default async function handler(req, res) {
 
   try {
     await connectDB();
-  } catch (_e) {
-    // Proceed to fallback store
+  } catch (error) {
+    console.warn("MongoDB is unavailable; continuing with the fallback store:", error);
   }
   return app(req, res);
 }
