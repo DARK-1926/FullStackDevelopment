@@ -218,6 +218,18 @@ const DAILY_CHALLENGE_QUERY = `
   }
 `;
 
+const FALLBACK_DAILY_CHALLENGE = {
+  id: "lc-daily-2026-11-05",
+  title: "Find the Distance Value Between Two Arrays",
+  platform: "LeetCode",
+  difficulty: "Easy",
+  category: "Array",
+  tags: ["Array", "Two Pointers", "Binary Search", "Sorting"],
+  link: "https://leetcode.com/problems/find-the-distance-value-between-two-arrays/",
+  date: "2026-11-05",
+  frontendQuestionId: "1385",
+};
+
 let dailyChallengeCache = null;
 let dailyChallengeCacheTime = 0;
 const DAILY_CACHE_TTL = 30 * 60 * 1000; // 30 minutes in-memory cache
@@ -242,7 +254,10 @@ export async function getLeetCodeDailyChallenge() {
     const json = await response.json();
     const daily = json.data?.activeDailyCodingChallengeQuestion;
     if (!daily || !daily.question) {
-      return { success: false, error: "Failed to parse daily coding challenge from LeetCode" };
+      if (dailyChallengeCache) {
+        return { success: true, data: dailyChallengeCache };
+      }
+      return { success: true, data: FALLBACK_DAILY_CHALLENGE, fallback: true };
     }
 
     const q = daily.question;
@@ -269,6 +284,9 @@ export async function getLeetCodeDailyChallenge() {
 
     return { success: true, data: challengeData };
   } catch (err) {
-    return { success: false, error: err.message };
+    if (dailyChallengeCache) {
+      return { success: true, data: dailyChallengeCache };
+    }
+    return { success: true, data: FALLBACK_DAILY_CHALLENGE, fallback: true, error: err.message };
   }
 }
