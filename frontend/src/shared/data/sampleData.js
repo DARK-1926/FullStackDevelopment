@@ -584,13 +584,13 @@ export const streakMilestones = [
 ];
 
 export const initialDailyChallenge = {
-  id: "lc-daily-2026-11-03",
-  title: "Minimum Operations to Reduce X to Zero",
+  id: "lc-daily-2026-11-05",
+  title: "Find the Distance Value Between Two Arrays",
   platform: "LeetCode",
-  difficulty: "Medium",
-  category: "Sliding Window",
-  tags: ["Array", "Hash Table", "Sliding Window"],
-  link: "https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero/",
-  description: "Find the minimum number of operations to reduce x to exactly 0 by removing elements from the left or right of array nums. If impossible, return -1.",
+  difficulty: "Easy",
+  category: "Array",
+  tags: ["Array", "Two Pointers", "Binary Search", "Sorting"],
+  link: "https://leetcode.com/problems/find-the-distance-value-between-two-arrays/",
+  description: "Given two integer arrays arr1 and arr2, and the integer d, return the distance value between the two arrays.",
   completed: false,
 };

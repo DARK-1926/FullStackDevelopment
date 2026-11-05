@@ -17,6 +17,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useAppContext } from "../../shared/context/AppContext.jsx";
 import ContributionSkyline from "../../components/ui/contribution-skyline.jsx";
 import GridScan from "../../components/ui/GridScan.jsx";
+import { TodayTargetCard } from "./components/TodayTargetCard.jsx";
 import "./dashboard.css";
 
 const PLATFORM_META = {
@@ -67,6 +68,7 @@ export function DashboardPage() {
     profile,
     user,
     growthStats,
+    setDailyGoal,
     dailyChallenge,
     completeDailyChallenge,
     syncCodeChefData,
@@ -425,7 +427,6 @@ export function DashboardPage() {
   const longestStreak = growthStats.longestStreak ?? 28;
   const dailyGoal = growthStats.dailyGoal ?? 2;
   const todayCount = growthStats.todayCompletedCount ?? 0;
-  const goalProgress = Math.min(100, Math.round((todayCount / dailyGoal) * 100));
 
   return (
     <main className="page-content dashboard-page">
@@ -443,11 +444,12 @@ export function DashboardPage() {
           reflection={0.12}
           points={false}
           scanDuration={3.2}
-          scanDelay={1.8}
+          scanDelay={1.0}
+          scanDirection="forward"
           scanWidth={0.7}
           trail={0.32}
           glow={0.28}
-          autoScan={false}
+          autoScan={true}
           clickEffect="none"
           lightMode
         />
@@ -650,33 +652,13 @@ export function DashboardPage() {
             </div>
           </div>
 
-          {/* Today's Focus & Daily Challenge Station */}
           <div className="dashboard-focus-station">
-            {/* Daily Goal Progress */}
-            <div className="focus-goal-card">
-              <div className="focus-card-head">
-                <span className="focus-card-kicker">TODAY'S TARGET</span>
-                <span className="dashboard-metric-icon">
-                  <Activity size={14} color="#10b981" />
-                </span>
-              </div>
-              <div className="goal-progress-wrap">
-                <div className="goal-numbers">
-                  <span className="goal-current">{todayCount}</span>
-                  <span className="goal-target">/ {dailyGoal}</span>
-                </div>
-                <div className="goal-bar-outer" role="progressbar" aria-valuenow={todayCount} aria-valuemin={0} aria-valuemax={dailyGoal}>
-                  <div className="goal-bar-fill" style={{ width: `${goalProgress}%` }} />
-                </div>
-              </div>
-              <p className="focus-goal-caption">
-                {todayCount >= dailyGoal
-                  ? "Daily goal reached! Keep going to accelerate velocity."
-                  : `Solve ${dailyGoal - todayCount} more problem(s) today to solidify your streak.`}
-              </p>
-            </div>
+            <TodayTargetCard
+              todayCount={todayCount}
+              dailyGoal={dailyGoal}
+              onUpdateGoal={setDailyGoal}
+            />
 
-            {/* Daily Challenge Card */}
             <div className="focus-challenge-card">
               <div className="focus-card-head">
                 <span className="focus-card-kicker">DAILY CHALLENGE</span>
@@ -684,15 +666,15 @@ export function DashboardPage() {
               </div>
 
               <div className="challenge-title">
-                {dailyChallenge?.title || "Minimum Operations to Reduce X to Zero"}
+                {dailyChallenge?.title || "Find the Distance Value Between Two Arrays"}
               </div>
 
               <div className="challenge-tags">
-                <span className={`challenge-tag challenge-tag--${(dailyChallenge?.difficulty || "Medium").toLowerCase()}`}>
-                  {dailyChallenge?.difficulty || "Medium"}
+                <span className={`challenge-tag challenge-tag--${(dailyChallenge?.difficulty || "Easy").toLowerCase()}`}>
+                  {dailyChallenge?.difficulty || "Easy"}
                 </span>
                 <span className="challenge-tag challenge-tag--topic">
-                  {dailyChallenge?.category || "Sliding Window"}
+                  {dailyChallenge?.category || "Array"}
                 </span>
               </div>
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { isValidHandle, getLeetCodeProfile } from "../src/services/leetcodeService.js";
+import { isValidHandle, getLeetCodeProfile, getLeetCodeDailyChallenge } from "../src/services/leetcodeService.js";
 
 describe("leetcodeService", () => {
   describe("isValidHandle", () => {
@@ -25,6 +25,17 @@ describe("leetcodeService", () => {
       const result = await getLeetCodeProfile("!");
       expect(result.success).toBe(false);
       expect(result.error).toContain("Invalid LeetCode handle");
+    });
+  });
+
+  describe("getLeetCodeDailyChallenge", () => {
+    it("returns a valid daily challenge structure with title, platform, and link", async () => {
+      const result = await getLeetCodeDailyChallenge();
+      expect(result.success).toBe(true);
+      expect(result.data).toBeDefined();
+      expect(result.data.platform).toBe("LeetCode");
+      expect(result.data.title).toBeTruthy();
+      expect(result.data.link).toContain("leetcode.com");
     });
   });
 });

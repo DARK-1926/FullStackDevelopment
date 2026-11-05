@@ -69,7 +69,7 @@ describe("sample opportunity and domain data", () => {
     expect(initialDailyChallenge.id).toBeTruthy();
     expect(initialDailyChallenge.title).toBeTruthy();
     expect(initialDailyChallenge.platform).toBe("LeetCode");
-    expect(initialDailyChallenge.difficulty).toBe("Medium");
+    expect(["Easy", "Medium", "Hard"]).toContain(initialDailyChallenge.difficulty);
     expect(initialDailyChallenge.link).toContain("leetcode.com");
   });
 });

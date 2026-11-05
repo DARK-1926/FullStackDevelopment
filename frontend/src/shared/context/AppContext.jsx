@@ -39,7 +39,7 @@ const STORAGE_KEYS = {
   APPLICATIONS: "opportunity_os_applications_v1",
   GROWTH: "opportunity_os_growth_v1",
   CALENDAR: "opportunity_os_calendar_nov_test_v3",
-  DAILY_CHALLENGE: "opportunity_os_daily_challenge_v1",
+  DAILY_CHALLENGE: "opportunity_os_daily_challenge_v2",
 };
 
 function loadFromStorage(key, fallback) {
@@ -234,9 +234,13 @@ export function AppProvider({ children }) {
     loadFromStorage(STORAGE_KEYS.CALENDAR, initialCalendarEvents),
   );
 
-  const [dailyChallenge, setDailyChallenge] = useState(() =>
-    loadFromStorage(STORAGE_KEYS.DAILY_CHALLENGE, initialDailyChallenge),
-  );
+  const [dailyChallenge, setDailyChallenge] = useState(() => {
+    const stored = loadFromStorage(STORAGE_KEYS.DAILY_CHALLENGE, initialDailyChallenge);
+    if (!stored || stored.title === "Minimum Operations to Reduce X to Zero") {
+      return initialDailyChallenge;
+    }
+    return stored;
+  });
 
   const [selectedOpportunityForAnalysis, setSelectedOpportunityForAnalysis] =
     useState(null);
@@ -290,6 +294,24 @@ export function AppProvider({ children }) {
     }
   };
 
+  const refreshDailyChallenge = async () => {
+    try {
+      const res = await fetchDailyChallenge();
+      if (res?.success && res.data) {
+        setDailyChallenge((prev) => {
+          const isSameDay = prev?.date === res.data.date;
+          return {
+            ...res.data,
+            completed: isSameDay ? Boolean(prev?.completed) : false,
+          };
+        });
+        return res.data;
+      }
+    } catch (err) {
+      console.warn("Failed to fetch live daily challenge:", err);
+    }
+    return null;
+  };
 
   useEffect(() => {
 
@@ -325,19 +347,7 @@ export function AppProvider({ children }) {
         refreshLiveContests();
         refreshOpportunities();
         refreshApplications();
-        fetchDailyChallenge()
-          .then((res) => {
-            if (!cancelled && res.success && res.data) {
-              setDailyChallenge((prev) => {
-                const isSameDay = prev?.date === res.data.date;
-                return {
-                  ...res.data,
-                  completed: isSameDay ? Boolean(prev?.completed) : false,
-                };
-              });
-            }
-          })
-          .catch(() => {});
+        refreshDailyChallenge();
       }
     };
     loadInitialData();
@@ -1249,6 +1259,7 @@ function mergeLiveEventsIntoAnnualActivity(currentAnnual = [], incomingEvents = 
   };
 
   const syncAllPlatforms = async (handlesToUse = null) => {
+    refreshDailyChallenge().catch(() => {});
     const handles = handlesToUse || profile.platformHandles || {};
     const results = [];
     if (handles.leetcode) {
@@ -1357,6 +1368,7 @@ function mergeLiveEventsIntoAnnualActivity(currentAnnual = [], incomingEvents = 
         syncCodeforcesData,
         syncAllPlatforms,
         dailyChallenge,
+        refreshDailyChallenge,
         completeDailyChallenge,
         calendarEvents,
         isContestsLoading,
